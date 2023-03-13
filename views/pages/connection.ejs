@@ -1,0 +1,33 @@
+<div class="container-sm d-flex justify-content-center align-items-center flex-grow-1 px-4 my-4">
+    <main class="mx-1">
+
+        <form method="POST" action="/connection/auth/email_password"
+        class="d-flex flex-column gap-2"
+        >
+
+        <% if (errorMessage)  { %>
+
+            <p><%= errorMessage %></p>
+
+        <% } %>
+
+            <input type="email" placeholder="E-mail">
+            <input type="password" placeholder="Mot de passe">
+
+            <button type="submit">se connecter</button>
+        </form>
+
+
+
+        <hr />
+
+        <div class="w-100">
+            <a class="btn btn-primary btn-lg mb-3" href="/connexion/auth/google">se connecter avec Google</a>
+            <a class="btn btn-primary btn-lg" href="/connexion/auth/facebook">se connecter avec Facebook</a>
+
+        </div>
+
+       
+
+    </main>
+</div>

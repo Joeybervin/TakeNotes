@@ -1,0 +1,56 @@
+<nav>
+    <div class="container-fluid d-flex flex-nowrap align-items-center justify-content-between py-3 px-4">
+
+        <!-- LOGO -->
+        <a class="logo text-decoration-none fw-bold" href="/">
+            TakesNotes
+        </a>
+
+            <!-- NAVIGATION -->
+            <ul class="d-none d-md-flex nav justify-content-center ">
+                <li class="nav-item">
+                  <a class="nav-link active" href="/">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/services">Services</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/a-propos">À propos</a>
+                </li>
+              </ul>
+
+
+          <div class="d-flex align-items-center">
+
+            <!-- CONNEXION -->
+            <div>
+              <% if (locals.user) { %>
+                <a class="text-decoration-none" href="/profil">
+                  <i class="bi bi-person d-flex flex-column align-items-center nav-icon">
+                    <p class="mb-0"><%= locals.user.firstName %></p>
+                  </i>
+                </a>
+              <% } else { %>
+                <a class="text-decoration-none" href="/connexion">
+                  <i class="bi bi-person d-flex flex-column align-items-center nav-icon">
+                    <p class="mb-0">connexion</p>
+                  </i>
+                </a>
+              <% } %>
+            </div>
+
+            <!-- SIDEBAR -->
+              <div class="d-block d-md-none ms-3">
+                <!-- burger menu -->
+                <div class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" >
+                  <i class="bi bi-list nav-icon"></i>
+                </div>
+                <!-- sidebar -->
+                <%- include('./sidebar.ejs') %>
+              </div>
+            
+          </div>
+
+
+    </div>
+</nav>

@@ -1,25 +1,22 @@
-// ======> GET Homepage
 
+const { pageInfos } = require('../../utils/pageInfos');
+const locals = pageInfos('TakesNotes','Free Noje.js Notes App', false)
+
+// ======> GET Homepage
 exports.homepage = async (req, res) => {
 
-    const locals = {
-        title: 'TakesNotes',
-        description : 'Free Noje.js Notes App'
-    }
-
-    res.render('index', locals)
+    console.log(locals)
+    
+    locals.user = req.user;
+    res.render('pages/home',  locals )
 
 }
 
 // ======> GET About
-
 exports.about = async (req, res) => {
 
-    const locals = {
-        title: 'About - TakesNotes',
-        description : 'Free Noje.js Notes App'
-    }
 
-    res.render('about', locals)
+    locals.user = req.user;
+    res.render('pages/about',  locals)
 
 }

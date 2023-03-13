@@ -1,0 +1,180 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+
+
+:root {
+    --background-color: #a6c5ff;
+    --bs-primary-rgb: #1e3fa1;
+    --bs-link-color : #000000;
+    --text-color : #000000;
+}
+* {
+    box-sizing: border-box;
+}
+
+html {
+    max-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body {
+    max-width: 100%;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);;
+    font-weight: 300;
+    font-size: 1.2rem;
+    background-image: url("../images/noise-bg.png");
+    }
+
+
+h1,h2,h3,h4,h5,h6 {
+    color: var(--bs-primary-rgb);
+    font-family: 'Unbounded', cursive;
+    font-weight: 800;
+}
+a {
+    color: var(--text-color);;
+}
+
+.container-fluid-custom {
+    max-width: 1600px;
+}
+
+/* BOUTONS */
+.btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.5rem;
+}
+
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--bs-primary-rgb);
+    --bs-btn-border-color: var(--bs-primary-rgb);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0043a8;
+    --bs-btn-hover-border-color: #0043a8;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--bs-primary-rgb);
+    --bs-btn-active-border-color: var(--bs-primary-rgb);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--bs-primary-rgb);
+    --bs-btn-disabled-border-color: var(--bs-primary-rgb);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--bs-primary-rgb);
+    --bs-btn-border-color: var(--bs-primary-rgb);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0043a8;
+    --bs-btn-hover-border-color: #0043a8;
+    --bs-btn-focus-shadow-rgb: 13,110,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--bs-primary-rgb);
+    --bs-btn-active-border-color: var(--bs-primary-rgb);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: var(--bs-primary-rgb);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: var(--bs-primary-rgb);
+    --bs-gradient: none;
+}
+
+/* NAVBAR */
+.logo {
+    font-size: clamp(1.1875rem, 0.9911rem + 0.9821vw, 1.875rem);
+    font-family: 'Unbounded', cursive;
+    color : #FFFFFF;
+}
+
+a > .bi-person {
+    -webkit-text-stroke: 0.5px;
+    color: var(--bs-primary-rgb);
+}
+
+.nav-icon {
+    font-size: clamp(1.25rem, 1.0357rem + 1.0714vw, 2rem);
+    -webkit-text-stroke:1px;
+    color: #000000;
+}
+nav i > p {
+    font-size: clamp(0.625rem, 0.5893rem + 0.1786vw, 0.75rem);
+}
+
+
+/* HOMEPAGE */
+
+.home-title {
+    background-color: #ffffff31;
+    text-shadow: #77777734 1px 2px 2px;
+}
+
+.home-title::before {
+    content: url('../images/stars.svg');
+    position: absolute;
+    left: -85px;
+    top: -45px;
+}
+
+.home-title::after {
+    content: url('../images/stars.svg');
+    position: absolute;
+    right: -90px;
+    bottom: -45px;
+}
+
+
+
+/* DASHBOARD */
+
+
+form.searchNoteInput input {
+    border : none;
+    border-bottom : 1px solid #000000;
+    background-color: transparent;
+    
+}
+form.searchNoteInput > input::placeholder {
+    color: #00000027;
+}
+form.searchNoteInput > input:focus, form.searchNoteInput > input:active
+{
+    border : none;
+    outline-offset : 0;
+    border-bottom : 2px solid #000000;
+    outline: none;
+}
+form.searchNoteInput > input:active + .icon-search , form.searchNoteInput > input:focus + .icon-search {
+    display: none;
+}
+.icon-search{
+    border-bottom : 1px solid #000000;
+
+}
+.pagination {
+    --bs-pagination-color: var(--bs-primary-rgb);
+    --bs-pagination-active-bg: var(--bs-primary-rgb);
+    --bs-pagination-active-border-color: var(--bs-primary-rgb);
+}
+
+
+
+
+@media (min-width: 1042px) {
+    .home {
+        background: 
+            url('../images/human-1.svg') left bottom no-repeat,
+            url('../images/human-2.svg') right bottom no-repeat,
+            url('../images/noise-bg.svg') left top repeat,
+            var(--background-color);
+        ;
+    }
+}
+
+
+
