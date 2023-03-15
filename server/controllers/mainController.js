@@ -5,10 +5,8 @@ const locals = pageInfos('TakesNotes','Free Noje.js Notes App', false)
 // ======> GET Homepage
 exports.homepage = async (req, res) => {
 
-    console.log(locals)
-    
-    locals.user = req.user;
-    res.render('pages/home',  locals )
+
+    res.render('pages/home',  {locals : pageInfos('home-page', 'TakesNotes','Free Noje.js Notes App', false, null)} )
 
 }
 
@@ -16,7 +14,7 @@ exports.homepage = async (req, res) => {
 exports.about = async (req, res) => {
 
 
-    locals.user = req.user;
-    res.render('pages/about',  locals)
+  
+    res.render('pages/about',  {locals : pageInfos('about-page', 'TakesNotes','Free Noje.js Notes App', false, null)})
 
 }

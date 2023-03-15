@@ -13,6 +13,7 @@ router.get('/', authController.connection);
 
 /* EMAIL & PASSWORD */
 router.post('/emailPassport/callback', localAuthController.emailPasswordCallback);
+router.post('/crer-un-compte', localAuthController.accountCreation);
 
 /* GOOGLE */
 router.get('/auth/google', googleAuthController.authGoogle);

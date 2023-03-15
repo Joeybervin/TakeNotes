@@ -1,13 +1,14 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 
-
-
 :root {
     --background-color: #a6c5ff;
-    --bs-primary-rgb: #1e3fa1;
+    --bs-primary-rgb: #23029b;
+    --bs-secondary-rgb: #FB4B4E;
     --bs-link-color : #000000;
     --text-color : #000000;
+    --font-size-base: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
 }
+
 * {
     box-sizing: border-box;
 }
@@ -21,15 +22,22 @@ html {
 body {
     max-width: 100%;
     min-height: 100vh;
+    overflow-x: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
     font-family: 'Poppins', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);;
+    color: var(--text-color);
     font-weight: 300;
-    font-size: 1.2rem;
-    background-image: url("../images/noise-bg.png");
-    }
-
-
+    background: var(--background-color);
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+/* background */
+body.home-page {
+    background: url('../images/paper-bg-1.png') left top no-repeat, var(--background-color);
+    background-size: cover;
+}
 h1,h2,h3,h4,h5,h6 {
     color: var(--bs-primary-rgb);
     font-family: 'Unbounded', cursive;
@@ -39,35 +47,29 @@ a {
     color: var(--text-color);;
 }
 
-.container-fluid-custom {
-    max-width: 1600px;
-}
-
 /* BOUTONS */
 .btn {
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 0.5rem;
+    font-size: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
 }
-
-
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: var(--bs-primary-rgb);
-    --bs-btn-border-color: var(--bs-primary-rgb);
+    --bs-btn-bg: var(--bs-secondary-rgb);
+    --bs-btn-border-color: var(--bs-secondary-rgb);
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #0043a8;
     --bs-btn-hover-border-color: #0043a8;
     --bs-btn-focus-shadow-rgb: 49,132,253;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: var(--bs-primary-rgb);
-    --bs-btn-active-border-color: var(--bs-primary-rgb);
+    --bs-btn-active-bg: var(--bs-secondary-rgb);
+    --bs-btn-active-border-color: var(--bs-secondary-rgb);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: var(--bs-primary-rgb);
-    --bs-btn-disabled-border-color: var(--bs-primary-rgb);
+    --bs-btn-disabled-bg: var(--bs-secondary-rgb);
+    --bs-btn-disabled-border-color: var(--bs-secondary-rgb);
 }
-
 .btn-outline-primary {
     --bs-btn-color: var(--bs-primary-rgb);
     --bs-btn-border-color: var(--bs-primary-rgb);
@@ -84,6 +86,48 @@ a {
     --bs-btn-disabled-border-color: var(--bs-primary-rgb);
     --bs-gradient: none;
 }
+.btn-icon {
+    max-width: 20px;
+}
+/* -> Google connection button */
+.btn-google-login {
+    --bs-btn-color: #000000;
+    --bs-btn-bg: #ffffff;
+    --bs-btn-border-color: #505050;
+    --bs-btn-hover-color: #505050;
+    --bs-btn-hover-bg: #f7f7f7;
+    --bs-btn-hover-border-color: #353535;
+    --bs-btn-focus-shadow-rgb: 13,110,253;
+    --bs-btn-active-color: #000000;
+    --bs-btn-active-bg: #f7f7f7;
+    --bs-btn-active-border-color: #353535;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #505050;
+    --bs-btn-disabled-bg: #b6b6b6;
+    --bs-btn-disabled-border-color: #505050;
+    --bs-gradient: none;
+
+}
+/* -> Facebook connection button */
+.btn-facebook-login {
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #4267b2;
+    --bs-btn-border-color: #4267b2;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #2d57ac;
+    --bs-btn-hover-border-color: #2d57ac;
+    --bs-btn-focus-shadow-rgb: 13,110,253;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #4267b2;
+    --bs-btn-active-border-color: #4267b2;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #505050;
+    --bs-btn-disabled-bg: #b6b6b6;
+    --bs-btn-disabled-border-color: #505050;
+    --bs-gradient: none;
+
+}
+
 
 /* NAVBAR */
 .logo {
@@ -91,12 +135,10 @@ a {
     font-family: 'Unbounded', cursive;
     color : #FFFFFF;
 }
-
 a > .bi-person {
     -webkit-text-stroke: 0.5px;
     color: var(--bs-primary-rgb);
 }
-
 .nav-icon {
     font-size: clamp(1.25rem, 1.0357rem + 1.0714vw, 2rem);
     -webkit-text-stroke:1px;
@@ -109,23 +151,41 @@ nav i > p {
 
 /* HOMEPAGE */
 
-.home-title {
-    background-color: #ffffff31;
-    text-shadow: #77777734 1px 2px 2px;
+h1 {
+    font-size: clamp(1.5rem, 1.2857rem + 1.0714vw, 2.25rem);
 }
-
-.home-title::before {
+h1 > span {
+    background: linear-gradient(90deg, hsla(214, 92%, 47%, 1) 0%, hsla(231, 85%, 24%, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    
+}
+h1::before {
     content: url('../images/stars.svg');
     position: absolute;
     left: -85px;
     top: -45px;
 }
 
-.home-title::after {
+h1::after {
     content: url('../images/stars.svg');
     position: absolute;
     right: -90px;
     bottom: -45px;
+}
+.about {
+    background-color: #ffffff8c;
+}
+
+/* PAGE : CONNEXION */
+
+.connection-page main > div > div {
+    height : 270px;
+    min-width: 280px;
+}
+#signUpPasswordMatchError, #connectionErrorMessage {
+    background-color: #ffd9d9;
 }
 
 
@@ -165,16 +225,34 @@ form.searchNoteInput > input:active + .icon-search , form.searchNoteInput > inpu
 
 
 
-@media (min-width: 1042px) {
+@media (min-width: 768px) {
     .home {
         background: 
-            url('../images/human-1.svg') left bottom no-repeat,
-            url('../images/human-2.svg') right bottom no-repeat,
-            url('../images/noise-bg.svg') left top repeat,
-            var(--background-color);
+            url('../images/human-1.svg') left -15% bottom no-repeat,
+            url('../images/human-2.svg') right -15% bottom no-repeat
         ;
+        background-size: contain;
+    }
+    
+    h1 {
+        line-height: 2.5rem;
     }
 }
+
+@media (min-width: 1024px) {
+    .home {
+        background: 
+            url('../images/human-1.svg') left  bottom no-repeat,
+            url('../images/human-2.svg') right bottom no-repeat
+        ;
+        background-size: contain;
+    }
+    
+    h1 {
+        line-height: 3rem;
+    }
+}
+
 
 
 

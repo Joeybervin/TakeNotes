@@ -1,5 +1,4 @@
 const { pageInfos } = require('../../utils/pageInfos');
-const locals = pageInfos('TakesNotes','Free Noje.js Notes App', true)
 
 // require('../config/passport.config');
 
@@ -8,6 +7,6 @@ const locals = pageInfos('TakesNotes','Free Noje.js Notes App', true)
 exports.dashboard = async (req, res) => {
 
     locals.user = req.user;
-    res.render('pages/dashboard/dashboard', locals)
+    res.render('pages/dashboard/dashboard', {locals : pageInfos('dashboard-page', 'TakesNotes','Free Noje.js Notes App', true, req.user)})
 
 }
