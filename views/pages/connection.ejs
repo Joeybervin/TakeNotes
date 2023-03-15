@@ -1,85 +1,100 @@
-<div class="container-sm d-flex justify-content-center align-items-center flex-grow-1 px-4 my-4">
-    <main class="mx-1">
 
-        <!-- error message -->
-        <p id="connectionErrorMessage" class="text-danger"><%= errorMessage %></p>
+    <div class=" container-sm d-flex justify-content-center align-items-center flex-grow-1 px-4 my-4">
+        <main class="col text-center mx-1">
 
-        <!-- EMAIL & PASSWORD CONNECTION METHOD -->
-        <div>
-            <!-- SIGN IN -->
-            <button type="button" data-bs-toggle="collapse" data-bs-target=".connectionForm"  aria-expanded="false" aria-controls="connectionForm">Se connecter</button>
-            <!-- SIGN UP -->
-            <button type="button" data-bs-toggle="collapse" data-bs-target=".connectionForm" aria-expanded="false" aria-controls="connectionForm">Créer un compte</button>
+            <!-- error message -->
+            <p id="connectionErrorMessage" class="text-danger  text-center px-2"><%= errorMessage %></p>
+            <!-- success message -->
+            <p id="connectionSuccessMessage" class="text-success text-center px-2"><%= successMessage %></p>
 
-            <!-- FORMS -->
-            <div class="col">
+            <!-- EMAIL & PASSWORD CONNECTION METHOD -->
+            <div>
+                <!-- SIGN IN -->
+                <button type="button" data-bs-toggle="collapse" data-bs-target=".connectionForm"  aria-expanded="false" aria-controls="connectionForm">Se connecter</button>
+                <!-- SIGN UP -->
+                <button type="button" data-bs-toggle="collapse" data-bs-target=".connectionForm" aria-expanded="false" aria-controls="connectionForm">Créer un compte</button>
 
-                <!-- SIGN-IN FORM -->
-                <div class="collapse fade show connectionForm" >
-                    <form method="POST" action="/connexion/emailPassport" class="signInForm w-100 d-flex flex-column gap-2">
+                <!-- FORMS -->
+                <div class="col">
 
-                        <!-- email -->
-                        <input id="signInEmailInput" class="rounded py-2 ps-3 mt-4 mb-3" type="email" placeholder="E-mail" autocomplete="username">
-                        <div class="position-relative">
-                        <!-- password -->
-                        <input id="signInPasswordInput" class="w-100 rounded py-2 ps-3 pe-1 " type="password" placeholder="Mot de passe" id="signInPassword"  autocomplete="current-password">
-                            <i id="signInPasswordIcon" class="position-absolute top-50 end-0 translate-middle-y bg-white bi py-1 px-3 me-1  bi-eye"></i>
-                        </div>
+                    <!-- SIGN-IN FORM -->
+                    <div class="collapse fade show connectionForm" >
+                        <form method="POST" action="/connexion/local/callback" class="signInForm w-100 d-flex flex-column justify-content-center gap-2">
+
+                            <!-- email -->
+                            <input id="signInEmailInput" name="username" class="rounded py-2 ps-3 mt-4 mb-3" type="email" placeholder="E-mail" autocomplete="username" autofocus required>
+                            <!-- password -->
+                            <div class="position-relative">
+                            <input id="signInPasswordInput" name="password" class="w-100 rounded py-2 ps-3 pe-1 " type="password" placeholder="Mot de passe" id="signInPassword"  autocomplete="current-password" required>
+                                <i id="signInPasswordIcon" class="position-absolute top-50 end-0 translate-middle-y bg-white bi bi-eye py-1 px-3 me-1"></i>
+                            </div>
 
 
-                        <button class="btn btn-primary btn-lg w-100 my-3" type="submit">se connecter</button>
+                            <button class="btn btn-primary btn-lg w-100 my-3" type="submit">se connecter</button>
 
-                        <p class="" role="button" data-bs-toggle="collapse" data-bs-target=".connectionForm" aria-expanded="false" aria-controls="connectionForm">Pas encore membre ? Créer un compte.</p>
+                            <p class="text-center" role="button" data-bs-toggle="collapse" data-bs-target=".connectionForm" aria-expanded="false" aria-controls="connectionForm">Pas encore membre ? Créer un compte.</p>
 
-                    </form>
-                </div>
+                        </form>
+                    </div>
 
-                <!-- SIGN-UP FORM -->
-                <div  class="collapse fade connectionForm"" >
-                    <form method="POST" action="/connexion/crer-un-compte" class="signUpForm d-flex flex-column gap-2">
-                        
-                        <!-- email -->
-                        <input id="signUpEmailInput" class="rounded py-2 ps-3 mt-4" type="email" name="email" placeholder="E-mail" autocomplete="username">
-                        <!-- password -->
-                        <div class="position-relative">
-                            <input id="signUpPassword" class="w-100 rounded py-2 ps-3 pe-1 " type="password" name="password" placeholder="Mot de passe" autocomplete="new-password" onkeyup='checkPasswordMatch();'>
-                            <i id="signUpPasswordIcon" class="position-absolute top-50 end-0 translate-middle-y bi bi-eye bg-white py-1 px-3 me-1 "></i>
+                    <!-- SIGN-UP FORM -->
+                    <div  class="collapse fade connectionForm"" >
+                        <form method="POST" action="/connexion/nouveau-membre" class="signUpForm d-flex flex-column justify-content-center gap-2">
                             
-                        </div>
-                        <!-- password confirmation -->
-                        <div class="position-relative">
-                            <input id="signUpConfirmationPassword" class="position-relative w-100 rounded py-2 ps-3 pe-1 " type="password" name="passwordConfirmation" placeholder="Confirmer le mot de passe" autocomplete="new-password" onkeyup='checkPasswordMatch();'>
-                            <i id="signUpConfirmationPasswordIcon" class="position-absolute top-0 end-0 bi bi-eye bg-white py-1 px-3 me-1 mt-2"></i>
-                            <p class="position-relative ps-2 text-danger mb-0 rounded" id="signUpPasswordMatchError">
-                            </p>
-                        </div>
-        
-                        <button class="btn btn-primary btn-lg w-100 my-3" type="submit">créer un compte</button>
-        
-                    </form>
+                            <!-- email -->
+                            <input id="signUpEmailInput" class="rounded py-2 ps-3 mt-4" type="email" name="email" placeholder="E-mail" autocomplete="username" autofocus required>
+                            <!-- password -->
+                            <div class="position-relative">
+                                <input id="signUpPassword" class="w-100 rounded py-2 ps-3 pe-1 " type="password" name="password" placeholder="Mot de passe" autocomplete="new-password" required onkeyup='checkPasswordMatch();'>
+                                <i id="signUpPasswordIcon" class="position-absolute top-50 end-0 translate-middle-y bi bi-eye bg-white py-1 px-3 me-1 "></i>
+                                
+                            </div>
+                            <!-- password confirmation -->
+                            <div class="position-relative">
+                                <input id="signUpConfirmationPassword" class="position-relative w-100 rounded py-2 ps-3 pe-1 " type="password" name="passwordConfirmation" placeholder="Confirmer le mot de passe" autocomplete="new-password" required onkeyup='checkPasswordMatch();'>
+                                <i id="signUpConfirmationPasswordIcon" class="position-absolute top-0 end-0 bi bi-eye bg-white py-1 px-3 me-1 mt-2"></i>
+                                <p class="position-relative text-danger rounded ps-2 mb-0 mt-2" id="signUpPasswordMatchError">
+                                </p>
+                            </div>
+            
+                            <button class="btn btn-primary btn-lg w-100 my-3" type="submit">créer un compte</button>
+            
+                        </form>
+                    </div>
+
                 </div>
 
             </div>
 
+            <hr />
+
+            <!-- NETWORK CONNECTION METHODS -->
+            <div class="d-flex flex-column align-items-center w-100">
+
+                <p>se connecter avec :</p>
+
+                <a class="btn btn-google-login btn-lg w-100 mb-3" href="/connexion/auth/google">
+                    <img class="btn-icon me-2" src="/images/g-logo.png" alt="google logo" />
+                    connexion avec Google
+                </a>
+                <a class="btn btn-facebook-login btn-lg w-100" href="/connexion/auth/facebook">
+                    <i class="btn-icon bi bi-facebook me-2"></i>
+                    connexion avec facebook
+                </a>
+
+            </div>
+
+        </main>
+    </div>
+
+<div class="d-none position-absolute w-100 h-100" id="loader" >
+    <div  class="h-100 d-flex justify-content-center align-items-center text-center">
+        <p class="text-light me-3 mb-0">connexion</p>
+        <div class="spinner-grow text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
+    </div>
 
-        <hr />
-
-        <!-- NETWORK CONNECTION METHODS -->
-        <div class="d-flex flex-column align-items-center w-100">
-
-            <p>se connecter avec :</p>
-
-            <a class="btn btn-google-login btn-lg w-100 mb-3" href="/connexion/auth/google">
-                <img class="btn-icon me-2" src="/images/g-logo.png" alt="google logo" />
-                connexion avec Google
-            </a>
-            <a class="btn btn-facebook-login btn-lg w-100" href="/connexion/auth/facebook">
-                <i class="btn-icon bi bi-facebook me-2"></i>
-                connexion avec facebook
-            </a>
-
-        </div>
-
-    </main>
 </div>
+<!-- javascript -->
+<script src="/javascript/script.js"></script>

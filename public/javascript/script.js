@@ -5,9 +5,9 @@ const signInPasswordInput = document.getElementById("signInPasswordInput");
 
 /* SIGN-UP FORM */
 const signUpForm = document.querySelector('.signUpForm');
+const signUpEmailInput = document.getElementById("signUpEmailInput");
 const signUpPasswordInput = document.getElementById("signUpPassword");
 const signUpConfirmationPasswordInput = document.getElementById("signUpConfirmationPassword");
-const signUpEmailInput = document.getElementById("signUpEmailInput");
 
 /* ERRORS MESSAGES */
 const connectionErrorMessage = document.getElementById('connectionErrorMessage');
@@ -23,15 +23,21 @@ const togglePasswordVisibility = (iconId, inputId) => {
         passwordInput.setAttribute('type', type);
 
         if (type === 'password') {
-            icon.classList.remove('bi-eye');
-            icon.classList.add('bi-eye-slash');
-        }
-        else {
+            
             icon.classList.remove('bi-eye-slash');
             icon.classList.add('bi-eye');
+            
+        }
+        else {
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
         };
     })
 }
+
+togglePasswordVisibility("signInPasswordIcon", 'signInPasswordInput');
+togglePasswordVisibility("signUpPasswordIcon", 'signUpPassword');
+togglePasswordVisibility("signUpConfirmationPasswordIcon", 'signUpConfirmationPassword');
 
   /* control if the two password value from the sign-up form match together */
 const checkPasswordMatch = () => {
@@ -45,10 +51,10 @@ const checkPasswordMatch = () => {
 
 // prevent the submit of empty input in sign-in form
 const validateSignInForm = (event) => {
-    console.log("CONNEXION")
-    if (inputName.value.trim() === '' || signInPasswordInput.value.trim() === '') {
+    if (signInEmailInput.value.trim() === '' || signInPasswordInput.value.trim() === '') {
         connectionErrorMessage.innerHTML = 'Veuillez remplir tous les champs.';
-        event.preventDefault(); // block form submit
+        // block form submit
+        event.preventDefault(); 
     }
 }
 signInForm.addEventListener('submit' , validateSignInForm)
@@ -61,3 +67,9 @@ const validateSignUpForm = (event) => {
     }
 }
 signUpForm.addEventListener('submit', validateSignUpForm)
+
+/* LOADING PAGE */
+signInForm.addEventListener('submit', () => {
+    const loader = document.getElementById('loader');
+    loader.classList.remove('d-none');
+});

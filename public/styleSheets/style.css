@@ -46,6 +46,9 @@ h1,h2,h3,h4,h5,h6 {
 a {
     color: var(--text-color);;
 }
+input::-ms-clear{
+    display: none;
+  }
 
 /* BOUTONS */
 .btn {
@@ -181,17 +184,24 @@ h1::after {
 /* PAGE : CONNEXION */
 
 .connection-page main > div > div {
-    height : 270px;
+    height : 260px;
     min-width: 280px;
+}
+.connection-page main {
+    max-width: 340px;
 }
 #signUpPasswordMatchError, #connectionErrorMessage {
     background-color: #ffd9d9;
 }
+#connectionSuccessMessage {
+    background-color: #c6ffdc;
+}
 
-
-
+#loader {
+    
+    background-color: #a6c5ffb6;
+}
 /* DASHBOARD */
-
 
 form.searchNoteInput input {
     border : none;
@@ -214,7 +224,15 @@ form.searchNoteInput > input:active + .icon-search , form.searchNoteInput > inpu
 }
 .icon-search{
     border-bottom : 1px solid #000000;
-
+}
+.dashboard-page h2 {
+    font-size: clamp(1.25rem, 0.4688rem + 2.5vw, 1.875rem);
+}
+.dashboard-page h2 span{
+    background: linear-gradient(90deg, hsla(214, 92%, 47%, 1) 0%, hsla(231, 85%, 24%, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }
 .pagination {
     --bs-pagination-color: var(--bs-primary-rgb);

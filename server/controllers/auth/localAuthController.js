@@ -1,68 +1,119 @@
 
 const passport = require('../../config/passport.config');
 const LocalStrategy = require('passport-local').Strategy;
-const userModel = require('../../models/user');
+const User = require('../../models/user');
+const { generateToken } = require('../../../utils/jw.util')
 const bcrypt = require('bcrypt');
 const saltRounds = 15;
 
 
 
-passport.use(new LocalStrategy({
-    email: 'email',
-    password: 'password'
-}, async (email, password, done) => {
-    try {
-        /* search for the use email in the database */
-        const user = await userModel.findOne({ email });
-
-        if (!user) {
-            return done(null, false, { errorMessage: 'E-mail introuvable. Créez un compte.' });
-        }
-
-        /* compare the password (input => database) */
-        const isValidPassword = await bcrypt.compare(password, user.passwordHash);
-
-        if (!isValidPassword) {
-            return done(null, false, { errorMessage: 'Le mot de passe est incorrecte' });
-        }
-
-        /* the user log in */
-        return done(null, user);
-
-    } catch (err) {
-        return done(err);
+passport.use(new LocalStrategy( {
+        username: 'email',
+        password: 'password',
+        passReqToCallback: true,
     }
+    , 
+    async function (req, email, password, done)  {
+        try {
+            /* search for the use email in the database */
+            const user = await User.findOne({ email });
+
+            /* req.body.signInEmailInput && signPasswordInput */
+            if (!user) {
+                req.session.errorMessage = "L'e-mail est incorrect. Réessayer ou bien créer un compte utilisateur.";
+                return done(null, false);
+            }
+            /* compare the password (input => database) */
+            const isValidPassword = await bcrypt.compare(password, user.password);
+            
+            if (!isValidPassword) {
+                req.session.errorMessage = "Le mot de passe est incorrect."
+                return done(null, false);
+            }
+
+            /* the user log in */
+            done(null, user);
+
+        }
+        catch (err) {
+            console.log(err)
+            req.session.errorMessage = "Désolé, une erreur est survenue sur notre serveur. Réessayez de vous connecter."
+            return done(null, false);
+        }
+
 }));
 
 
+// --> GET local connection page callback
+exports.authLocalCallback = 
+    passport.authenticate('local', { 
+        failureRedirect: '/connexion',
+        successRedirect : '/tableau-de-bord',
+    })
+;
 
-// ======> POST connect user with email & password
-exports.emailPasswordCallback = async (req, res) => {
-
-}
 
 exports.accountCreation = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const passwordConfirmation = req.body.passwordConfirmation;
 
-    let hash = password === passwordConfirmation ? bcrypt.hashSync(password, saltRounds) : undefined;
-    const user = await userModel.findOne({ email });
+    
+    try {
+        console.log(email, password, passwordConfirmation)
 
+        if (email.trim() === '' || password.trim() === '' || passwordConfirmation.trim() === '') {
+            req.session.errorMessage = "Tous les champs sont obligatoires."
+            return res.redirect('/connexion');
+        }
+    
+        const user = await User.findOne({ email }); // search for the user in the database
+    
+        console.log(user)
 
-    const newUser = {
-        email: email,
-        firstName : 'user123',
-        lastName : '',
-        password : hash,
-        profile_img : 'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg' ,
-        token: generateToken({email: email}),
-        insert_date : new Date(),
+        if (user) {
+            console.log("USER QUI DECOCOCO")
+            req.session.errorMessage = "L'adresse e-mail existe déjà"
+            return res.redirect('/connexion');
+        }
+    
+        const passwordMatch = password === passwordConfirmation // Compare the passwords
+        console.log(passwordMatch)
+
+        if (!passwordMatch) {
+            console.log("JE DECOCOCCO")
+            req.session.errorMessage = "Les mots de passe ne sont pas identiques"
+            return res.redirect('/connexion');
+        }
+
+        const hash = bcrypt.hashSync(password, saltRounds); // hash the password
+        
+        const newUser = {
+            email: email,
+            firstName : 'user123',
+            lastName : '',
+            password : hash,
+            profile_img : 'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg' ,
+            token: generateToken({email: email}),
+            insert_date : new Date(),
+        }
+    
+        let userSaved = await User.create(newUser)
+    
+        if (!userSaved) {
+            req.session.errorMessage = "Désolé, une erreur est survenue sur notre serveur. Réessayez de vous connecter.";
+            return res.redirect('/connexion');
+        }
+
+        req.session.successMessage = "Votre compte à bien été créé";
+        return res.redirect('/connexion');
+        
+    } catch (error) {
+        console.log("SIGN-UP ERROR : ", error);
+        req.session.errorMessage =  "Désolé, une erreur est survenue sur notre serveur. Réessayez de vous connecter.";
+        return res.redirect('/connexion')
+        
     }
-
-    if (!user && hash !== undefined && email.value.trim() !== '' && password.value.trim() !== '' && passwordConfirmation.value.trim() !== '') {
-
-    }
-
 
 }

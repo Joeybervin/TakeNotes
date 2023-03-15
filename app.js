@@ -4,6 +4,7 @@ const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('flash');
 const MongoStore = require('connect-mongo');
 //require('./server/config/passport.config');
 
@@ -16,15 +17,18 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+  errorMessage : null,
+  successMessage: null,
   store: MongoStore.create({
     mongoUrl : process.env.MONGODB_URI
-  })
+  }),
 }));
 
 // Initialize Passport
 //passportconfig(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());

@@ -4,8 +4,22 @@ const { pageInfos } = require('../../../utils/pageInfos')
 
 // ======> RENDER connection page
 exports.connection = async (req, res) => {
-    
-    res.render('pages/connection', {locals : pageInfos("connection-page", 'TakesNotes','Free Noje.js Notes App', false, req.user) , errorMessage : null})
+ 
+    /* if someone is already connected */
+    if (req.user) {
+        res.redirect('/profil')
+    }
+
+    /* Get success and error message */
+    const errorMessage = req.session.errorMessage;
+    const successMessage = req.session.successMessage;
+
+    req.session.errorMessage = null; // delete session errorMessage
+    req.session.successMessage = null; // delete session errorMessage
+
+    res.render('pages/connection', {locals : pageInfos("connection-page", 'TakesNotes','Free Noje.js Notes App', false, req.user) ,
+    errorMessage : errorMessage || null ,
+    successMessage : successMessage || null})
 
 }
 

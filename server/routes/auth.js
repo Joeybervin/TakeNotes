@@ -12,8 +12,8 @@ router.get('/', authController.connection);
 /* ============== CONNECTION METHODS ============== */
 
 /* EMAIL & PASSWORD */
-router.post('/emailPassport/callback', localAuthController.emailPasswordCallback);
-router.post('/crer-un-compte', localAuthController.accountCreation);
+router.post('/local/callback', localAuthController.authLocalCallback);
+router.post('/nouveau-membre', localAuthController.accountCreation);
 
 /* GOOGLE */
 router.get('/auth/google', googleAuthController.authGoogle);
