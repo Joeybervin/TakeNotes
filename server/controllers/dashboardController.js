@@ -1,7 +1,5 @@
 const { pageInfos } = require('../../utils/pageInfos');
-
-// require('../config/passport.config');
-
+const noteModel = require('../models/note');
 
 // ======> GET Dashboard
 exports.dashboard = async (req, res) => {

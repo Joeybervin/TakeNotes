@@ -1,12 +1,18 @@
 
 
 
-<div class="container-sm d-flex flex-grow-1 px-2 my-4">
+<div class="container-sm flex-grow-1 px-2 my-4">
     
     <main class="mx-1">
-        <h2 class="mt-4">Bonjour, <span class="text-decoration-underline ms-2"><%= locals.user.firstName %></span></h2>
-        
-        <div>
+
+        <div class="d-flex align-items-center mt-4">
+            <h2 class="mb-0">Bonjour, <span class="text-decoration-underline ms-2"><%= locals.user.firstName %></span></h2>
+            
+            <a href="/tableau-de-bord/nouvelle-note" class="d-inline btn btn-primary btn-sm ms-3">+ <span class="d-none d-sm-inline-block m-0 p-0">Créer une note</span></a>
+
+        </div>
+    
+        <div class="row">
 
         </div>
 

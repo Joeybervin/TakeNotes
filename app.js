@@ -19,6 +19,11 @@ app.use(session({
   saveUninitialized: true,
   errorMessage : null,
   successMessage: null,
+  cookie: {
+    sameSite: 'strict',
+    httpOnly: true,
+    maxAge: 3600000, // life cycle 1 hour
+  },
   store: MongoStore.create({
     mongoUrl : process.env.MONGODB_URI
   }),
@@ -44,6 +49,16 @@ app.use(expressLayouts);
 app.set('layout', './index');
 app.set('view engine', 'ejs');
 
+// errors
+app.use((err, req, res, next) => {
+  // headers error (sent 2 times)
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  console.log(err)
+  res.status(500).render('pasges/error', { errorCode: 500, errorMessage: 'Une erreur est survenue, Essayez de ré-ouvrir l\'application' })
+})
 // Routes
 app.use('/', require('./server/routes/index'));
 app.use('/connexion', require('./server/routes/auth'));
