@@ -1,18 +1,18 @@
-<nav>
-    <div class="container-fluid d-flex flex-nowrap align-items-center justify-content-between py-3 px-4">
+<nav class="mw-100 mx-1 mx-sm-5">
+    <div class="position-relative container-fluid d-flex flex-nowrap align-items-center justify-content-between py-3">
 
         <!-- LOGO -->
-        <a class="logo text-decoration-none fw-bold" href="/">
+        <a class="logo text-decoration-none fw-bold " href="/">
             TakesNotes
         </a>
 
             <!-- NAVIGATION -->
-            <ul class="d-none d-md-flex nav justify-content-center ">
+            <ul class="d-none d-md-flex position-absolute position-absolute top-50 start-50 translate-middle nav justify-content-center  ">
                 <li class="nav-item">
                   <a class="nav-link active" href="/">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/services">Services</a>
+                  <a class="nav-link" href="/tableau-de-bord">Dashboard</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/a-propos">À propos</a>
@@ -20,10 +20,10 @@
               </ul>
 
 
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center ">
 
             <!-- CONNEXION -->
-            <div class="">
+            <div class="d-none d-sm-block">
               <% if (locals.user) { %>
                 <a class="text-decoration-none" href="/profil">
                   <i class="bi bi-person d-flex flex-column align-items-center nav-icon">

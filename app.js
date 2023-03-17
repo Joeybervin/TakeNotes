@@ -7,6 +7,7 @@ const passport = require('passport');
 const flash = require('flash');
 const MongoStore = require('connect-mongo');
 //require('./server/config/passport.config');
+const date = new Date();
 
 const app = express();
 // port number used
@@ -22,7 +23,7 @@ app.use(session({
   cookie: {
     sameSite: 'strict',
     httpOnly: true,
-    maxAge: 3600000, // life cycle 1 hour
+    maxAge: 7 * 24 * 60 * 60 * 1000, // life cycle 1 week
   },
   store: MongoStore.create({
     mongoUrl : process.env.MONGODB_URI

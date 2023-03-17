@@ -69,11 +69,8 @@ exports.accountCreation = async (req, res) => {
         }
     
         const user = await User.findOne({ email }); // search for the user in the database
-    
-        console.log(user)
 
         if (user) {
-            console.log("USER QUI DECOCOCO")
             req.session.errorMessage = "L'adresse e-mail existe déjà"
             return res.redirect('/connexion');
         }
@@ -82,7 +79,6 @@ exports.accountCreation = async (req, res) => {
         console.log(passwordMatch)
 
         if (!passwordMatch) {
-            console.log("JE DECOCOCCO")
             req.session.errorMessage = "Les mots de passe ne sont pas identiques"
             return res.redirect('/connexion');
         }
@@ -95,7 +91,7 @@ exports.accountCreation = async (req, res) => {
             lastName : '',
             password : hash,
             profile_img : 'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg' ,
-            token: generateToken({email: email}),
+            token: generateToken(email),
             insert_date : new Date(),
         }
     

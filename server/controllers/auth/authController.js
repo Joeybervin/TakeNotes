@@ -7,7 +7,7 @@ exports.connection = async (req, res) => {
  
     /* if someone is already connected */
     if (req.user) {
-        res.redirect('/profil')
+        return res.redirect('/profil')
     }
 
     /* Get success and error message */

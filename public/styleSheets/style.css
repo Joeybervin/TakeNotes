@@ -20,9 +20,9 @@ html {
 }
 
 body {
-    max-width: 100%;
+    max-width: 100vw;
     min-height: 100vh;
-    overflow-x: scroll;
+    overflow-x: hidden;
     -ms-overflow-style: none; 
     scrollbar-width: none; 
     font-family: 'Poppins', sans-serif;
@@ -38,7 +38,7 @@ body.home-page {
     background: url('../images/paper-bg-1.png') left top no-repeat, var(--background-color);
     background-size: cover;
 }
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6, .title {
     color: var(--bs-primary-rgb);
     font-family: 'Unbounded', cursive;
     font-weight: 800;
@@ -133,22 +133,40 @@ input::-ms-clear{
 
 
 /* NAVBAR */
-.logo {
+nav .logo {
     font-size: clamp(1.1875rem, 0.9911rem + 0.9821vw, 1.875rem);
     font-family: 'Unbounded', cursive;
     color : #FFFFFF;
 }
-a > .bi-person {
+nav a > .bi-person {
     -webkit-text-stroke: 0.5px;
     color: var(--bs-primary-rgb);
 }
-.nav-icon {
+nav .nav-icon {
     font-size: clamp(1.25rem, 1.0357rem + 1.0714vw, 2rem);
     -webkit-text-stroke:1px;
     color: #000000;
 }
 nav i > p {
     font-size: clamp(0.625rem, 0.5893rem + 0.1786vw, 0.75rem);
+}
+
+/* SIDEBAR NAVIGATION MENU */
+.sidebar li {
+    --bs-border-width: 1px;
+    --bs-border-color: #000000;
+    --bs-border-style : solid;
+}
+.sidebar li:hover {
+    background-color: var(--background-color);
+}
+.sidebar ul li:nth-child(2) {
+    --bs-border-color: var(--bs-secondary-rgb);
+    background-color: var(--bs-secondary-rgb);
+}
+.sidebar li:nth-child(2):hover {
+    background-color: var(--bs-primary-rgb);
+    --bs-border-color: var(--bs-primary-rgb);
 }
 
 
@@ -183,14 +201,14 @@ h1::after {
 
 /* PAGE : CONNEXION */
 
-.connection-page main > div > div {
+.connection-page main > div > div > div {
     height : 260px;
     min-width: 280px;
 }
 .connection-page main {
     max-width: 340px;
 }
-#signUpPasswordMatchError, #connectionErrorMessage {
+#signUpPasswordMatchError, #connectionErrorMessage, .errorMessage {
     background-color: #ffd9d9;
 }
 #connectionSuccessMessage {
@@ -234,30 +252,59 @@ form.searchNoteInput > input:active + .icon-search , form.searchNoteInput > inpu
     -webkit-background-clip: text;
     color: transparent;
 }
+.bi-inbox {
+    font-size: clamp(1.875rem, 0.1563rem + 5.5vw, 3.25rem);
+}
+.card-body p:last-of-type {
+    font-size: clamp(0.625rem, 0.4688rem + 0.5vw, 0.75rem);
+}
+.bi-x-lg:hover {
+    color: red;
+    background-color: #ffd9d9;
+    cursor: pointer;
+}
 .pagination {
     --bs-pagination-color: var(--bs-primary-rgb);
     --bs-pagination-active-bg: var(--bs-primary-rgb);
     --bs-pagination-active-border-color: var(--bs-primary-rgb);
 }
 
+/* PAGE : CREATE A NEW NOTE */
+.createNote-page {
 
-
+}
+.noteContent {
+    font-weight: 300;
+    font-size: clamp(0.8125rem, 0.5781rem + 0.75vw, 1rem);
+}
 
 @media (min-width: 768px) {
+
+    /* HOMEPAGE */
     .home {
         background: 
             url('../images/human-1.svg') left -15% bottom no-repeat,
             url('../images/human-2.svg') right -15% bottom no-repeat
         ;
-        background-size: contain;
+        background-size: 300px 400px;
     }
     
     h1 {
         line-height: 2.5rem;
     }
+
+    /* PAGE : CREATE A NEW NOTE */
+    .createNote-page {
+        
+        background: url('../images/human-3.svg') left bottom no-repeat;
+        background-size: 300px;
+        background-color: var(--background-color);
+        
+    }
 }
 
 @media (min-width: 1024px) {
+    /* PAGE : HOMEPAGE */
     .home {
         background: 
             url('../images/human-1.svg') left  bottom no-repeat,
@@ -269,6 +316,9 @@ form.searchNoteInput > input:active + .icon-search , form.searchNoteInput > inpu
     h1 {
         line-height: 3rem;
     }
+
+    /* PAGE : CREATE A NEW NOTE */
+   
 }
 
 

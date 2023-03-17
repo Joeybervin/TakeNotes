@@ -1,20 +1,92 @@
 
 
-
-<div class="container-sm flex-grow-1 px-2 my-4">
+<div class="mw-100 container d-flex flex-grow-1 my-4 px-0">
     
-    <main class="mx-1">
+    
+    <main class="position-relative flex-grow-1 mx-sm-5">
 
-        <div class="d-flex align-items-center mt-4">
-            <h2 class="mb-0">Bonjour, <span class="text-decoration-underline ms-2"><%= locals.user.firstName %></span></h2>
+        <div class="d-flex align-items-center my-4">
+            <h2 class="mb-0 ms-2 ms-sm-0">Bonjour, <span class="text-decoration-underline ms-2"><%= locals.user.firstName %></span></h2>
             
-            <a href="/tableau-de-bord/nouvelle-note" class="d-inline btn btn-primary btn-sm ms-3">+ <span class="d-none d-sm-inline-block m-0 p-0">Créer une note</span></a>
+            <a href="/tableau-de-bord/nouvelle-note?role=create" class="d-inline btn btn-primary btn-sm ms-4 ms-lg-5">+ <span class="d-none d-sm-inline-block m-0 p-0">Créer une note</span></a>
 
         </div>
     
-        <div class="row">
+        <div class="">
+
+            <!-- NOTES LIST -->
+            <div class="row mx-1">
+
+                <% if (notes.length > 0) { notes.forEach(function(note, index, notesArray) {  %>
+                    <div class=" col-sm-4 mb-4">
+                        <div class="position-relative h-100 card">
+                            <!-- delete a note -->
+                            <a href="/tableau-de-bord/deleteNote?id=<%=note._id%>">
+                                <i class="position-absolute top-0 end-0 bi bi-x-lg rounded p-1 mt-2 me-3"></i>
+                            </a>
+                            <!-- update a note -->
+                            <a href="/tableau-de-bord/nouvelle-note?role=update&id=<%=note._id%>&title=<%=note.title%>" class="card-body text-decoration-none">
+                                <p class="title card-title ms-2 mt-2 mb-0">
+                                    
+                                    <%= note.title %>
+                                </p>
+                                <hr />
+                                <p class="noteContent ms-1"><%= note.content %></p>
+                                <p class="position-absolute bottom-0 end-0 card-text text-end mb-2 me-3">
+                                    <small class="text-muted">
+                                        <%= note.last_updated %>
+                                    </small>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <% })} %>
+
+            </div>
+            
+            <!-- EMPTY NOTES LIST -->
+            <% if (notes.length === 0) { %>
+                <div class="dashboard-empty h-75 d-flex align-items-center">
+                    <div class="d-flex flex-grow-1 flex-column align-items-center justify-content-center">
+                        <i class="bi bi-inbox"></i>
+                        <p class=" w-75 text-center fs-6">Vous n'avez pas encore écris de note.</p>
+                        <a href="/tableau-de-bord/nouvelle-note?role=create" class="btn btn-outline-primary btn-md">+ Créer une note</span></a>
+                    </div>
+                </div>
+            <% } %>
+
+            <!-- PAGINATION -->
+
+            <% if (notes.length > 0) { %>
+                <nav class="" aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <!-- PREVIOUS PAGE -->
+                        <li class="page-item <%= Number(currentPage) === 1 ? 'disabled' : '' %>">
+                            <a class="page-link" href="/tableau-de-bord?page=<%= Number(currentPage) - 1 %>">
+                                <i class="bi bi-chevron-left"></i>
+                            </a>
+                            
+                        </li>
+                        <% for (let i = 1; i <= totalPages; i++) { %>
+                            <li class="page-item <%= Number(currentPage) === i ? 'active' : null %>"
+                                <%= Number(currentPage) === i ? `arria-current='page'` : null %>>
+                                <a class="page-link" href="?page=<%=i%>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                        <% } %>
+                        <!-- NEXT PAGE -->
+                        <li class="page-item <%= Number(currentPage) === Number(totalPages) ? 'disabled' : '' %>">
+                            <a class="page-link" href="/tableau-de-bord?page=<%= Number(currentPage) + 1 %>">
+                                <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            <% } %>
 
         </div>
 
-    </main>
+    </main> 
 </div>
