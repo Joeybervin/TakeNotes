@@ -2,6 +2,8 @@
 
 :root {
     --background-color: #a6c5ff;
+    --bs-danger : #ffd9d9;
+    --bs-success : #c6ffdc;
     --bs-primary-rgb: #23029b;
     --bs-secondary-rgb: #FB4B4E;
     --bs-link-color : #000000;
@@ -12,13 +14,11 @@
 * {
     box-sizing: border-box;
 }
-
 html {
     max-width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
 }
-
 body {
     max-width: 100vw;
     min-height: 100vh;
@@ -48,7 +48,7 @@ a {
 }
 input::-ms-clear{
     display: none;
-  }
+}
 
 /* BOUTONS */
 .btn {
@@ -84,9 +84,9 @@ input::-ms-clear{
     --bs-btn-active-bg: var(--bs-primary-rgb);
     --bs-btn-active-border-color: var(--bs-primary-rgb);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: var(--bs-primary-rgb);
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: var(--bs-primary-rgb);
+    --bs-btn-disabled-color: #363636;;
+    --bs-btn-disabled-bg: #bbbbbb;;
+    --bs-btn-disabled-border-color: #868686;;
     --bs-gradient: none;
 }
 .btn-icon {
@@ -138,17 +138,21 @@ nav .logo {
     font-family: 'Unbounded', cursive;
     color : #FFFFFF;
 }
-nav a > .bi-person {
-    -webkit-text-stroke: 0.5px;
-    color: var(--bs-primary-rgb);
-}
 nav .nav-icon {
-    font-size: clamp(1.25rem, 1.0357rem + 1.0714vw, 2rem);
-    -webkit-text-stroke:1px;
+    font-size: clamp(1.875rem, 1.0938rem + 2.5vw, 2.5rem);
+    -webkit-text-stroke: 1.5px;
     color: #000000;
 }
 nav i > p {
     font-size: clamp(0.625rem, 0.5893rem + 0.1786vw, 0.75rem);
+}
+nav img {
+    max-width: 30px;
+}
+nav img + p {
+    font-size: clamp(0.625rem, 0.3125rem + 1vw, 0.875rem);
+    
+    color: var(--bs-primary-rgb);
 }
 
 /* SIDEBAR NAVIGATION MENU */
@@ -188,7 +192,6 @@ h1::before {
     left: -85px;
     top: -45px;
 }
-
 h1::after {
     content: url('../images/stars.svg');
     position: absolute;
@@ -208,17 +211,89 @@ h1::after {
 .connection-page main {
     max-width: 340px;
 }
-#signUpPasswordMatchError, #connectionErrorMessage, .errorMessage {
-    background-color: #ffd9d9;
+.errorMessage {
+    background-color : #ffd9d9;
 }
-#connectionSuccessMessage {
+.successMessage {
     background-color: #c6ffdc;
 }
-
 #loader {
     
     background-color: #a6c5ffb6;
 }
+
+
+/* PAGE : PROFILE */
+.principal-form {
+    max-width : 700px;
+}
+.principal-form > div > div:nth-child(n)::before {
+    font-size: clamp(0.75rem, 0.4375rem + 1vw, 1rem);
+    position: absolute;
+    top: -17px;
+    left: 20px;
+    padding : 5px;
+    background-color: var(--background-color);
+    color: #ffffff;
+}
+/* profile image section */
+.principal-form > div > div:nth-child(2)::before {
+    content: 'Photo de profil : ';
+}
+/* display name section */
+.principal-form > div > div:nth-child(3)::before {
+    content: 'Prénom & Nom : ';
+}
+/* mail section */
+.principal-form > div > div:nth-child(4)::before {
+    content: 'E-mail : ';
+}
+/* password section */
+.principal-form > div > div:nth-child(5)::before {
+    content: 'Mot de passe :';
+}
+/* tooltip interaction disabled section */
+.principal-form > div > .updateTooltip::after {
+    content: attr(data-text);
+    position:absolute;
+    font-size: clamp(0.5625rem, 0.3281rem + 0.75vw, 0.75rem);
+
+    right: 0;
+    top : -35px;
+    
+    padding: 5px 7px;
+    border-radius:5px;
+    background:#ebebeb;
+    color: #777777;
+    text-align:center;
+
+    display:none;
+    /* animation */
+    opacity:0;
+    transition:.3s opacity;   
+}
+.principal-form > div > div.updateTooltip:hover::after/* , .updateTooltip > div:hover::after */ {
+    display:block;
+    opacity: 1;
+}
+/* .updateTooltip > div::after {
+    content: '';
+    position: absolute;
+    left: 35%;
+    top : -8px;
+    border: 10px solid #000;
+    border-color: #ebebeb transparent transparent transparent ;
+    display:none;
+    opacity:0;
+    transition:.3s opacity;   
+} */
+profile-page input {
+    font-size: clamp(0.75rem, 0.5938rem + 0.5vw, 0.875rem);
+}
+label {
+    font-size: clamp(0.5625rem, 0.25rem + 1vw, 0.8125rem);
+}
+
 /* DASHBOARD */
 
 form.searchNoteInput input {
@@ -286,7 +361,7 @@ form.searchNoteInput > input:active + .icon-search , form.searchNoteInput > inpu
             url('../images/human-1.svg') left -15% bottom no-repeat,
             url('../images/human-2.svg') right -15% bottom no-repeat
         ;
-        background-size: 300px 400px;
+        background-size: 360px 550px;
     }
     
     h1 {
@@ -310,7 +385,7 @@ form.searchNoteInput > input:active + .icon-search , form.searchNoteInput > inpu
             url('../images/human-1.svg') left  bottom no-repeat,
             url('../images/human-2.svg') right bottom no-repeat
         ;
-        background-size: contain;
+        background-size: fit;
     }
     
     h1 {

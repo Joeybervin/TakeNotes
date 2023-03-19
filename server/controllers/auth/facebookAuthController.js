@@ -1,7 +1,9 @@
 const passport = require('../../config/passport.config');
-const FacebookStrategy = require('passport-facebook').Strategy;
+const { generateToken, generateRandomValue }  = require('../../../utils/index');
 const User = require('../../models/user');
-const { generateToken }  = require('../../../utils/jw.util');
+const FacebookStrategy = require('passport-facebook').Strategy;
+
+
 
 /* FACEBOOK STRATEGY */
 passport.use(new FacebookStrategy({
@@ -17,9 +19,11 @@ passport.use(new FacebookStrategy({
             firstName : facebookProfile.name.givenName,
             lastName : facebookProfile.name.familyName,
             profile_img : facebookProfile.photos[0].value,
-            token: generateToken({firstName: facebookProfile.name.givenName, lastName : facebookProfile.name.familyName }),
+            token: generateToken(facebookProfile.emails[0].value),
             facebook_id: facebookProfile.id,
             insert_date : new Date(),
+            authentification_method : 'facebook',
+            public_id : generateRandomValue(20)
         }
         try {
             let user = User.findOne({ email: faebook.email })

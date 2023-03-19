@@ -3,9 +3,9 @@
         <main class="col text-center mx-1">
 
             <!-- error message -->
-            <p id="connectionErrorMessage" class="text-danger text-center rounded px-2"><%= errorMessage %></p>
+            <p class="errorMessage text-danger text-center rounded px-2"><%= errorMessage %></p>
             <!-- success message -->
-            <p id="connectionSuccessMessage" class="text-success text-center rounded px-2"><%= successMessage %></p>
+            <p class="successMessage text-success text-center rounded px-2"><%= successMessage %></p>
 
             <!-- EMAIL & PASSWORD CONNECTION METHOD -->
             <div>
@@ -55,7 +55,7 @@
                             <div class="position-relative">
                                 <input id="signUpConfirmationPassword" class="position-relative w-100 rounded py-2 ps-3 pe-1 " type="password" name="passwordConfirmation" placeholder="Confirmer le mot de passe" autocomplete="new-password" required onkeyup='checkPasswordMatch();'>
                                 <i id="signUpConfirmationPasswordIcon" class="position-absolute top-0 end-0 bi bi-eye bg-white py-1 px-3 me-1 mt-2"></i>
-                                <p class="position-relative text-danger rounded ps-2 mb-0 mt-2" id="signUpPasswordMatchError">
+                                <p class="errorMessage position-relative text-danger rounded ps-2 mb-0 mt-2">
                                 </p>
                             </div>
             

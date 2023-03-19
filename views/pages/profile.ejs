@@ -1,5 +1,131 @@
-<h2>MON PROFIL</h2>
 
-<form action="/connexion/logout" method="POST">
-    <button type="submit">se déconnecter</button>
-</form>
+<div class="  d-flex justify-content-center align-items-center flex-grow-1  my-4">
+    <main class="col text-center">
+
+        <h2>MON PROFIL</h2>
+
+        <!-- ERROR & SUCCESS MESSAGES -->
+        <div class="mx-auto mt-2 col-10 col-sm-6">
+            <!-- ERROR MESSAGE -->
+            <p class="errorMessage text-danger text-center rounded px-3">
+                <%= errorMessage %>
+            </p>
+            <!-- SUCCESS MESSAGE -->
+            <p class="successMessage text-success text-center rounded px-3">
+                <%= successMessage %>
+            </p>
+        </div>
+
+
+        <!-- PRINCIPAL FORM -->
+        <form class="principal-form mx-auto mt-5" action="/profil/update" method="POST" enctype="multipart/form-data">
+            <div class="border border-2 border-opacity-75 rounded p-3 mx-4">
+
+                <p>Méthode de connexion :
+                    <% if (locals.user.authentification_method === 'local') { %>
+                        <i class="bi bi-envelope" title="méthode de connexion email et mot de passe"></i>
+                        <i class="bi bi-key"></i>
+                    <% } else if  (locals.user.authentification_method === 'google') {%>
+                        <i class="bi bi-google" title="méthode de connexion google"></i>
+                    <% } else { %>
+                        <i class="bi bi-facebook" title="méthode de connexion facebook"></i>
+                    <% } %>
+                </p>
+
+                <!-- PROFILE IMG -->
+                <div class="position-relative border rounded py-4 px-3 mb-3">
+                        <!-- input -->
+                        <img class="col-4 col-sm-2 rounded-circle mb-3" src="<%= locals.user.profile_img %>" alt="votre image de profil">
+                            <input class="form-control form-control-sm mb-3" type="file" id="profile_img" name="profile_img">
+                        <!-- submit button -->
+                        <button class="btn btn-outline-primary btn-md" type="submit" name="action" value="profileImage">Changer la photo de profil</button>
+                </div>
+
+                <!-- DISPLAY NAME -->
+                <div class="position-relative d-flex justify-content-center align-items-center flex-wrap gap-2 border rounded py-4 px-3 mb-3">
+
+                    <!-- FIRSTNAME -->
+                    <div class="form-floating flex-fill ">
+                        <!-- input -->
+                        <input type="text" class="form-control pt-2 pb-0 mb-2" name="firstName" id="firstName" value="<%= locals.user.firstName %>" autocomplete="off">
+                        <!-- label -->
+                        <label for="firstName">Prénom</label>
+                    </div>
+
+                    <!-- LASTNAME -->
+                    <div class="form-floating flex-fill">
+                        <!-- input -->
+                        <input type="text" class="form-control pt-2 pb-0 mb-2" name="lastName" id="lastName" value="<%= locals.user.lastName %>" autocomplete="off">
+                        <!-- label -->
+                        <label for="lastName">Nom :</label>
+                    </div> 
+
+                </div>
+
+                <!-- EMAIL -->
+                <div class="<%= locals.user.authentification_method === 'local' ? null : 'updateTooltip' %> position-relative border rounded py-4 px-3 mb-3"
+                     data-text="Seul les comptes Email & Mot de passe peuvent modifier leur adress mail.">
+                    <fieldset class="w-100" <%= locals.user.authentification_method === 'local' ? null : 'disabled'%> >
+                        <div class="form-floating flex-fill">
+                            <!-- input -->
+                            <input type="email" class="form-control pt-2 pb-0" name="email" id="email" value="<%= locals.user.email %>" autocomplete="off">
+                            <!-- label -->
+                            <label for="email">E-mail :</label>
+                        </div>
+                    </fieldset>
+                    
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="<%= locals.user.authentification_method === 'local' ? null : 'updateTooltip' %>  position-relative border rounded py-4 px-3"
+                data-text="Seul les comptes Email & Mot de passe peuvent modifier leur mot de passe.">
+                    <fieldset class="w-100 h-100" <%= locals.user.authentification_method === 'local' ? null : 'disabled'%> >
+                            <!-- OLD PASSWORD -->
+                            <div class="form-floating flex-fill mb-3">
+                                <!-- input -->
+                                <!-- autocomplete="new-password" fake fields are a workaround for chrome autofill getting the wrong fields -->
+                                <input type="password" class="form-control pt-2 pb-0 mb-2" name="password" id="password"  autocomplete="new-password"/>
+                                <!-- labek -->
+                                <label for="password">Ancien mot de passe :</label>
+                            </div>
+            
+                            <!-- PASSWORD CHANGEMENT -->
+                            <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 mb-3">
+                                <!-- NEW PASSWORD -->
+                                <div class="form-floating flex-fill">
+                                    <!-- input -->
+                                    <input type="password" class="form-control pt-2 pb-0 mb-2" name="newPassword" id="newPassword" autocomplete="new-password">
+                                    <!-- labek -->
+                                    <label for="newPassword">Nouveau mot de passe :</label>
+                                </div>
+
+                                <!-- CONFIRMATION NEW PASSWORD -->
+                                <div class="form-floating flex-fill">
+                                    <!-- input -->
+                                    <input type="password" class="form-control pt-2 pb-0 mb-2" name="newPasswordConfirmation" id="newPasswordConfirmation" autocomplete="new-password">
+                                    <!-- labek -->
+                                    <label for="newPasswordConfirmation">Confirmation du nouveau mot de passe :</label>
+                                </div>
+            
+                            </div>
+            
+                            <button class="btn btn-outline-primary btn-md" name="action" value="profilePassword" type="submit">Changer de mot de passe</button>
+                    </fieldset>
+                </div>
+
+                <!-- SUBMIT THE WHOLE FORM -->
+                <button  class="btn btn-primary btn-md mt-5" type="submit" name="action" value="profile" >Enregistrer les changements</button>
+
+            </div>
+        </form>
+
+
+        <!-- LOG OUT -->
+        <form action="/connexion/logout" method="POST">
+            <button class="btn btn-outline-primary btn-md mt-5" type="submit">se déconnecter</button>
+        </form>
+
+        
+
+    </main>
+</div>

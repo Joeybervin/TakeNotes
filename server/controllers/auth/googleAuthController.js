@@ -1,5 +1,5 @@
 const User = require('../../models/user');
-const { generateToken }  = require('../../../utils/jw.util');
+const { generateToken }  = require('../../../utils/index');
 const passport = require('../../config/passport.config');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -16,9 +16,11 @@ passport.use(new GoogleStrategy({
             firstName : googleProfile.name.givenName,
             lastName : googleProfile.name.familyName,
             profile_img : googleProfile.photos[0].value,
-            token: generateToken({firstName: googleProfile.name.givenName, lastName : googleProfile.name.familyName }),
+            token: generateToken(googleProfile.emails[0].value),
             google_id: googleProfile.id,
             insert_date : new Date(),
+            authentification_method : 'google',
+            public_id : generateRandomValue(20),
         }
         try {
             let user = await User.findOne({email: googleProfile.emails[0].value});

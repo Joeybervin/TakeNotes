@@ -7,6 +7,6 @@ const { isLoggedIn } = require('../middleware/checkAuth');
 router.get('/', isLoggedIn,  userController.profile);
 
 // ======> POST update user profile
-router.get('/', isLoggedIn,  userController.profileUpdate);
+router.post('/update', isLoggedIn,  userController.profileUpdate);
 
 module.exports = router;

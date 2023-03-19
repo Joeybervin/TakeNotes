@@ -1,5 +1,5 @@
 const userModel = require('../../models/user');
-const { pageInfos } = require('../../../utils/pageInfos')
+const { pageInfos } = require('../../../utils/index')
 
 
 // ======> RENDER connection page
@@ -22,7 +22,6 @@ exports.connection = async (req, res) => {
     successMessage : successMessage || null})
 
 }
-
 
 // ======> LOGOUT (destroy user session)
 exports.logout = (req, res) => {

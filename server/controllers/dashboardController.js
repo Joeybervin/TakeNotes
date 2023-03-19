@@ -1,7 +1,5 @@
-const { pageInfos } = require('../../utils/pageInfos');
 const userModel = require('../models/user');
-const { generateToken } = require('../../utils/jw.util');
-const { timeSinceLastUpdate } = require('../../utils/timeSinceLastUpdate.util');
+const { timeSinceLastUpdate, generateToken, pageInfos } = require('../../utils/index');
 
 
 

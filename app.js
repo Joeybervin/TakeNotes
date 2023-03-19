@@ -4,14 +4,20 @@ const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const passport = require('passport');
-const flash = require('flash');
 const MongoStore = require('connect-mongo');
-//require('./server/config/passport.config');
-const date = new Date();
+const fileUpload = require('express-fileupload');
 
 const app = express();
 // port number used
 const port = 5000 || process.env.PORT;
+
+// image upload 
+app.use(fileUpload({
+  useTempFiles : true,
+  safeFileNames: true,
+  preserveExtension: 0,
+  tempFileDir: `${__dirname}/public/tmp`
+}));
 
 // Initializing the generic session middleware
 app.use(session({
@@ -34,7 +40,6 @@ app.use(session({
 //passportconfig(passport);
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());

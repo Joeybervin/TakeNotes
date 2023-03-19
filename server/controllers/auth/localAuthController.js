@@ -2,9 +2,9 @@
 const passport = require('../../config/passport.config');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../../models/user');
-const { generateToken } = require('../../../utils/jw.util')
+const { generateToken } = require('../../../utils/index')
 const bcrypt = require('bcrypt');
-const saltRounds = 15;
+const saltRounds = Number(process.env.SALT_ROUNDS);
 
 
 
@@ -76,7 +76,6 @@ exports.accountCreation = async (req, res) => {
         }
     
         const passwordMatch = password === passwordConfirmation // Compare the passwords
-        console.log(passwordMatch)
 
         if (!passwordMatch) {
             req.session.errorMessage = "Les mots de passe ne sont pas identiques"
@@ -93,6 +92,8 @@ exports.accountCreation = async (req, res) => {
             profile_img : 'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg' ,
             token: generateToken(email),
             insert_date : new Date(),
+            authentification_method : 'local',
+            public_id : generateRandomValue(20)
         }
     
         let userSaved = await User.create(newUser)

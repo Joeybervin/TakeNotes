@@ -18,6 +18,8 @@ var usersSchema = mongoose.Schema({
     token: String,
     google_id: String,
     facebook_id: String,
+    authentification_method : String,
+    public_id: String,
     insert_date : Date,
 })
 

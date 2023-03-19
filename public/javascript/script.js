@@ -10,8 +10,8 @@ const signUpPasswordInput = document.getElementById("signUpPassword");
 const signUpConfirmationPasswordInput = document.getElementById("signUpConfirmationPassword");
 
 /* ERRORS MESSAGES */
-const connectionErrorMessage = document.getElementById('connectionErrorMessage');
-const signUpPasswordMatchError = document.getElementById("signUpPasswordMatchError");
+const connectionErrorMessage = document.querySelector('main > p.errorMessage');
+const signUpPasswordMatchError = document.querySelector("div > i + .errorMessage");
 
 /* show the password input value */
 const togglePasswordVisibility = (iconId, inputId) => {

@@ -26,9 +26,10 @@
             <div class="d-none d-sm-block">
               <% if (locals.user) { %>
                 <a class="text-decoration-none" href="/profil">
-                  <i class="bi bi-person d-flex flex-column align-items-center nav-icon">
-                    <p class="mb-0"><%= locals.user.firstName %></p>
-                  </i>
+                  <div class="d-flex flex-column align-items-center">
+                    <img class="object-fit-fill rounded-circle" src="<%= locals.user.profile_img %>" alt="photo de profil">
+                    <p class="mt-2 mb-0"><%= locals.user.firstName %></p>
+                  </div>
                 </a>
               <% } else { %>
                 <a class="text-decoration-none" href="/connexion">

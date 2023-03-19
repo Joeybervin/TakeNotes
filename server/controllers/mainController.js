@@ -1,6 +1,5 @@
 
-const { pageInfos } = require('../../utils/pageInfos');
-const locals = pageInfos('TakesNotes','Free Noje.js Notes App', false)
+const { pageInfos } = require('../../utils/index');
 
 // ======> GET Homepage
 exports.homepage = async (req, res) => {

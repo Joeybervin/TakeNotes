@@ -19,6 +19,8 @@ passport.deserializeUser(async function(id, done) {
             lastName: user.lastName,
             profile_img: user.profile_img,
             token: user.token,
+            public_id : user.public_id,
+            authentification_method : user.authentification_method
         }
         //console.log('DESERIALIZATION SUCCESSFUL', user);
         done(null, filteredUser);
