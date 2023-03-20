@@ -38,7 +38,7 @@ html.loading {
 }
 /* background */
 body.home-page {
-    background: url('../images/paper-bg-1.png') left top no-repeat, var(--background-color);
+    background: url('../images/paper-bg.png') left top no-repeat, var(--background-color);
     background-size: cover;
 }
 h1,h2,h3,h4,h5,h6, .title {
@@ -49,10 +49,10 @@ h1,h2,h3,h4,h5,h6, .title {
 a {
     color: var(--text-color);;
 }
-input::-ms-clear{
+
+input[type="text"] {
     display: none;
 }
-
 /* BOUTONS */
 .btn {
     padding-left: 1rem;
@@ -379,6 +379,11 @@ form.searchNoteInput > input:active + .icon-search , form.searchNoteInput > inpu
 .noteContent {
     font-weight: 300;
     font-size: clamp(0.8125rem, 0.5781rem + 0.75vw, 1rem);
+}
+
+/* FOOTER */
+footer > p {
+    font-size: clamp(0.63rem, calc(0.58rem + 0.24vw), 0.75rem);
 }
 
 @media (min-width: 768px) {

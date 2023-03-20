@@ -11,8 +11,8 @@
 
         <!-- SEARCH -->
         <% if (locals.user) { %>
-            <form role="search" method="POST" action="/tableau-de-bord/searchNotes" class="d-flex mt-2 mb-4" >
-                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Rechercher">
+            <form role="search" method="POST" action="/tableau-de-bord/searchNote" class="d-flex mt-2 mb-4" >
+                <input class="form-control me-2" name="search" type="search" placeholder="Rechercher" aria-label="Rechercher">
                 <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
             </form>
         <% } %>

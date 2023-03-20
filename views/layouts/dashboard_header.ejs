@@ -1,11 +1,8 @@
-<form role="search" method="POST" action="/tableau-de-bord/searchNotes"  class="searchNoteInput d-flex justify-content-center mt-5 px-4">
+<form role="search" method="POST" action="/tableau-de-bord/searchNote"  id="searchForm" class="searchNoteInput d-flex justify-content-center mt-5 px-4">
 
-    
-        <input class="container col-11 col-sm-5 px-0 py-2 ps-4 mx-0" type="search" name="search" id="search" placeholder="Rechercher..." aria-lebel="Search"/>
+        <input class="container col-11 col-sm-5 px-0 py-2 ps-4 mx-0" value="<%=searchString%>" type="search" name="search" id="search" placeholder="Rechercher..." aria-lebel="Search"/>
+        <input type="submit" hidden />
         <i class="icon-search bi bi-search pe-2"></i>
 
-
-
-
 </form>
-
+<script src="/javascript/searchNote.js"></script>
