@@ -39,7 +39,7 @@ exports.dashboard = async (req, res) => {
             return note;
         });
 
-        res.render('pages/dashboard/dashboard', {locals : pageInfos('dashboard-page', 'TakesNotes','Free Noje.js Notes App', true, req.user),
+        res.render('pages/dashboard/dashboard', {locals : pageInfos('dashboard-page', 'TakeNotes','Free Noje.js Notes App', true, req.user),
         notes: sortedNotes,
         currentPage: page,
         totalPages: totalPages})
@@ -66,7 +66,7 @@ exports.createNewNote = async (req, res) => {
             })
     }
 
-    res.render('pages/dashboard/createNewNote', {locals : pageInfos('createNote-page', 'TakesNotes - nouvelle note', '', false, req.user),
+    res.render('pages/dashboard/createNewNote', {locals : pageInfos('createNote-page', 'TakeNotes - nouvelle note', '', false, req.user),
     role : req.query.role,
     errorMessage : req.query.errorMessage || null,
     noteId : noteToUpdate?.notes[0]._id || null,

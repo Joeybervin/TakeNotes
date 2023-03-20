@@ -17,7 +17,7 @@ exports.connection = async (req, res) => {
     req.session.errorMessage = null; // delete session errorMessage
     req.session.successMessage = null; // delete session errorMessage
 
-    res.render('pages/connection', {locals : pageInfos("connection-page", 'TakesNotes','Free Noje.js Notes App', false, req.user) ,
+    res.render('pages/connection', {locals : pageInfos("connection-page", 'TakeNotes','Free Noje.js Notes App', false, req.user) ,
     errorMessage : errorMessage || null ,
     successMessage : successMessage || null})
 

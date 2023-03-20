@@ -6,7 +6,7 @@ exports.homepage = async (req, res) => {
 
     const user = req.user || null;
 
-    res.render('pages/home',  {locals : pageInfos('home-page', 'TakesNotes','Free Noje.js Notes App', false, user)} )
+    res.render('pages/home',  {locals : pageInfos('home-page', 'TakeNotes','Free Noje.js Notes App', false, user)} )
 
 }
 
@@ -15,6 +15,6 @@ exports.about = async (req, res) => {
 
     const user = req.user || null;
 
-    res.render('pages/about',  {locals : pageInfos('about-page', 'TakesNotes','Free Noje.js Notes App', false, user)})
+    res.render('pages/about',  {locals : pageInfos('about-page', 'TakeNotes','Free Noje.js Notes App', false, user)})
 
 }
