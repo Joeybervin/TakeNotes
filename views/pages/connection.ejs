@@ -11,9 +11,14 @@
             <div>
                 <div class="d-flex">
                     <!-- SIGN IN -->
-                    <button type="button" class="flex-fill ps-2" data-bs-toggle="collapse" data-bs-target=".connectionForm"  aria-expanded="false" aria-controls="connectionForm">Se connecter</button>
+                    <input checked type="radio" class="btn-check" name="connectionFormAccess" id="signinFormAccessButton" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary btn-radio-left flex-fill py-3"  for="signinFormAccessButton" data-bs-toggle="collapse" data-bs-target=".connectionForm"  aria-expanded="false"  aria-controls="connectionForm">Se connecter</label>
+                    
                     <!-- SIGN UP -->
-                    <button type="button" class="flex-fill ps-2" data-bs-toggle="collapse" data-bs-target=".connectionForm" aria-expanded="false" aria-controls="connectionForm">Créer un compte</button>
+                    <input type="radio" class="btn-check" name="connectionFormAccess" id="signupFormAccessButton" autocomplete="off">
+                    <label class="btn btn-outline-primary btn-radio-right flex-fill py-3" for="signupFormAccessButton" data-bs-toggle="collapse" data-bs-target=".connectionForm" aria-expanded="false"  aria-controls="connectionForm">Créer un compte</label>
+                
+                
                 </div>
 
                 <!-- FORMS -->
@@ -32,7 +37,7 @@
                             </div>
 
 
-                            <button class="btn btn-primary btn-lg w-100 my-3" type="submit">se connecter</button>
+                            <button class="btn btn-primary btn-lg w-100 my-3" type="submit" onsubmit="displayLoader('signInForm')">se connecter</button>
 
                             <p class="text-center" role="button" data-bs-toggle="collapse" data-bs-target=".connectionForm" aria-expanded="false" aria-controls="connectionForm">Pas encore membre ? Créer un compte.</p>
 
@@ -40,26 +45,33 @@
                     </div>
 
                     <!-- SIGN-UP FORM -->
-                    <div  class="collapse fade connectionForm"" >
+                    <div  class="collapse fade connectionForm" >
                         <form method="POST" action="/connexion/nouveau-membre" class="signUpForm d-flex flex-column justify-content-center gap-2">
                             
                             <!-- email -->
                             <input id="signUpEmailInput" class="rounded py-2 ps-3 mt-4" type="email" name="email" placeholder="E-mail" autocomplete="username" autofocus required>
                             <!-- password -->
-                            <div class="position-relative">
-                                <input id="signUpPassword" class="w-100 rounded py-2 ps-3 pe-1 " type="password" name="password" placeholder="Mot de passe" autocomplete="new-password" required onkeyup='checkPasswordMatch();'>
-                                <i id="signUpPasswordIcon" class="position-absolute top-50 end-0 translate-middle-y bi bi-eye bg-white py-1 px-3 me-1 "></i>
-                                
+                            <div>
+                                <div class="position-relative">
+                                    <input id="signUpPassword" class="w-100 rounded py-2 ps-3 pe-1 " type="password" name="password" placeholder="Mot de passe" autocomplete="new-password" required onkeyup='passwordCheck("signUpPassword", "signUpConfirmationPassword")'>
+                                    <i id="signUpPasswordIcon" class="position-absolute top-50 end-0 translate-middle-y bi bi-eye bg-white py-1 px-3 me-1 "></i>
+                                </div>
+                                <p id="passwordValidationString" class="mb-0 fst-italic text-muted">
+                                    <span id="charsNumberRegexValid">8 à 25 caractères</span>|
+                                    <span id="lowercaseRegexValid"> 1 minuscule </span>|
+                                    <span id="uppercaseRegexValid"> 1 majuscule</span>|
+                                    <span id="specialCharsRegexValid"> 1 symbole @$!%*._?-&# </span>|
+                                    <span id="numberRegexValid">1 chiffre</span>
+                                </p>
                             </div>
                             <!-- password confirmation -->
                             <div class="position-relative">
-                                <input id="signUpConfirmationPassword" class="position-relative w-100 rounded py-2 ps-3 pe-1 " type="password" name="passwordConfirmation" placeholder="Confirmer le mot de passe" autocomplete="new-password" required onkeyup='checkPasswordMatch();'>
+                                <input id="signUpConfirmationPassword" class="position-relative w-100 rounded py-2 ps-3 pe-1 " type="password" name="passwordConfirmation" placeholder="Confirmer le mot de passe" autocomplete="new-password" required onkeyup='passwordCheck("signUpPassword", "signUpConfirmationPassword");'>
                                 <i id="signUpConfirmationPasswordIcon" class="position-absolute top-0 end-0 bi bi-eye bg-white py-1 px-3 me-1 mt-2"></i>
-                                <p class="errorMessage position-relative text-danger rounded ps-2 mb-0 mt-2">
-                                </p>
+                                <p class="errorMessage passwordMatchErrorMessage position-relative text-danger rounded ps-2 mb-0 mt-2"></p>
                             </div>
             
-                            <button class="btn btn-primary btn-lg w-100 my-3" type="submit">créer un compte</button>
+                            <button class="btn btn-primary btn-lg w-100 my-3" type="submit" onsubmit="displayLoader('signUpForm')">créer un compte</button>
             
                         </form>
                     </div>
@@ -89,15 +101,16 @@
         </main>
     </div>
 
-    <!-- LOADER -->
-    <div class="d-none position-absolute w-100 h-100" id="loader" >
-        <div  class="h-100 d-flex justify-content-center align-items-center text-center">
-            <p class="text-light me-3 mb-0">connexion</p>
-            <div class="spinner-grow text-light" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+<!-- LOADER -->
+<div class="d-none position-absolute w-100 h-100" id="loader" >
+    <div  class="h-100 d-flex justify-content-center align-items-center text-center">
+        <p class="text-light me-3 mb-0">connexion</p>
+        <div class="spinner-grow text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
-
     </div>
+</div>
 <!-- javascript -->
-<script src="/javascript/script.js"></script>
+<script src="/javascript/connection.js"></script>
+<script src="/javascript/passwordCheck.js"></script>
+<script src="/javascript/loader.js"></script>

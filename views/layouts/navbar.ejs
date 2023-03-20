@@ -6,51 +6,51 @@
             TakesNotes
         </a>
 
-            <!-- NAVIGATION -->
-            <ul class="d-none d-md-flex position-absolute position-absolute top-50 start-50 translate-middle nav justify-content-center  ">
-                <li class="nav-item">
-                  <a class="nav-link active" href="/">Accueil</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/tableau-de-bord">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/a-propos">À propos</a>
-                </li>
-              </ul>
+        <!-- NAVIGATION -->
+        <ul class="d-none d-md-flex position-absolute position-absolute top-50 start-50 translate-middle nav justify-content-center  ">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tableau-de-bord">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/a-propos">À propos</a>
+            </li>
+        </ul>
 
 
-          <div class="d-flex align-items-center ">
+        <div class="d-flex align-items-center ">
 
-            <!-- CONNEXION -->
-            <div class="d-none d-sm-block">
-              <% if (locals.user) { %>
-                <a class="text-decoration-none" href="/profil">
-                  <div class="d-flex flex-column align-items-center">
-                    <img class="object-fit-fill rounded-circle" src="<%= locals.user.profile_img %>" alt="photo de profil">
-                    <p class="mt-2 mb-0"><%= locals.user.firstName %></p>
-                  </div>
-                </a>
-              <% } else { %>
-                <a class="text-decoration-none" href="/connexion">
-                  <i class="bi bi-person d-flex flex-column align-items-center nav-icon">
-                    <p class="mb-0">connexion</p>
-                  </i>
-                </a>
-              <% } %>
-            </div>
-
-            <!-- SIDEBAR -->
-              <div class="d-block d-md-none ms-3">
-                <!-- burger menu -->
-                <div class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" >
-                  <i class="bi bi-list nav-icon"></i>
+          <!-- CONNEXION -->
+          <div class="d-none d-sm-block">
+            <% if (locals.user) { %>
+              <a class="text-decoration-none" href="/profil">
+                <div class="d-flex flex-column align-items-center">
+                  <img referrerpolicy="no-referrer" class="object-fit-fill rounded-circle mx-auto" src="<%= locals.user.profile_img %>" alt="photo de profil">
+                  <p class="my-0 mx-auto"><%= locals.user.firstName %></p>
                 </div>
-                <!-- sidebar -->
-                <%- include('./sidebar.ejs') %>
-              </div>
-            
+              </a>
+            <% } else { %>
+              <a class="text-decoration-none" href="/connexion">
+                <i class="bi bi-person d-flex flex-column align-items-center">
+                  <p class="mb-0">connexion</p>
+                </i>
+              </a>
+            <% } %>
           </div>
+
+          <!-- SIDEBAR -->
+            <div class="d-block d-md-none ms-3">
+              <!-- burger menu -->
+              <div class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" >
+                <i class="bi bi-list nav-icon"></i>
+              </div>
+              <!-- sidebar -->
+              <%- include('./sidebar.ejs') %>
+            </div>
+          
+        </div>
 
 
     </div>

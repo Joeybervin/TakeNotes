@@ -1,5 +1,5 @@
 const User = require('../../models/user');
-const { generateToken }  = require('../../../utils/index');
+const { generateToken, generateRandomValue }  = require('../../../utils/index');
 const passport = require('../../config/passport.config');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -33,7 +33,9 @@ passport.use(new GoogleStrategy({
             }
         } 
         catch (error) {
-            console.log(error)
+            done(error);
+            /* req.session.errorMessage = "Une erreur est apparue lors de la connexion avec Facebook."
+            res.redirect('/connexion') */
         }
     }
 ));

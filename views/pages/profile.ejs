@@ -1,5 +1,5 @@
 
-<div class="  d-flex justify-content-center align-items-center flex-grow-1  my-4">
+<div class="d-flex justify-content-center align-items-center flex-grow-1  my-4">
     <main class="col text-center">
 
         <h2>MON PROFIL</h2>
@@ -18,7 +18,7 @@
 
 
         <!-- PRINCIPAL FORM -->
-        <form class="principal-form mx-auto mt-5" action="/profil/update" method="POST" enctype="multipart/form-data">
+        <form class="principal-form mx-auto mt-5" action="/profil/update" method="POST" enctype="multipart/form-data" onsubmit="displayLoader()">
             <div class="border border-2 border-opacity-75 rounded p-3 mx-4">
 
                 <p>Méthode de connexion :
@@ -80,6 +80,7 @@
                 <div class="<%= locals.user.authentification_method === 'local' ? null : 'updateTooltip' %>  position-relative border rounded py-4 px-3"
                 data-text="Seul les comptes Email & Mot de passe peuvent modifier leur mot de passe.">
                     <fieldset class="w-100 h-100" <%= locals.user.authentification_method === 'local' ? null : 'disabled'%> >
+                            
                             <!-- OLD PASSWORD -->
                             <div class="form-floating flex-fill mb-3">
                                 <!-- input -->
@@ -89,25 +90,38 @@
                                 <label for="password">Ancien mot de passe :</label>
                             </div>
             
+                            <p class="errorMessage passwordMatchErrorMessage position-relative text-danger rounded mb-2"></p>
+                            
                             <!-- PASSWORD CHANGEMENT -->
-                            <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 mb-3">
+                            <div class="d-flex justify-content-center align-items-start flex-wrap gap-2 mb-4">
                                 <!-- NEW PASSWORD -->
-                                <div class="form-floating flex-fill">
-                                    <!-- input -->
-                                    <input type="password" class="form-control pt-2 pb-0 mb-2" name="newPassword" id="newPassword" autocomplete="new-password">
-                                    <!-- labek -->
-                                    <label for="newPassword">Nouveau mot de passe :</label>
+                                <div class="w-50 flex-fill d-flex flex-column">
+                                    <div class="form-floating flex-fill ">
+                                        <!-- input -->
+                                        <input type="password" class="form-control pt-2 pb-0 mb-2" name="newPassword" id="newPassword" autocomplete="new-password" onkeyup="passwordCheck('newPassword','newPasswordConfirmation')">
+                                        <!-- labek -->
+                                        <label for="newPassword">Nouveau mot de passe :</label>
+                                    </div>
+                                    <!-- security check -->
+                                    <p id="passwordValidationString" class="flex-fill text-break fst-italic text-center text-muted mx-2 mb-0 ">
+                                        <span id="charsNumberRegexValid">8 à 25 caractères</span>|
+                                        <span id="lowercaseRegexValid"> 1 minuscule </span>|
+                                        <span id="uppercaseRegexValid"> 1 majuscule</span>|
+                                        <span id="specialCharsRegexValid"> 1 symbole @$!%*._?-&# </span>|
+                                        <span id="numberRegexValid">1 chiffre</span>
+                                    </p>
                                 </div>
-
                                 <!-- CONFIRMATION NEW PASSWORD -->
                                 <div class="form-floating flex-fill">
                                     <!-- input -->
-                                    <input type="password" class="form-control pt-2 pb-0 mb-2" name="newPasswordConfirmation" id="newPasswordConfirmation" autocomplete="new-password">
+                                    <input type="password" class="form-control pt-2 pb-0 mb-2" name="newPasswordConfirmation" id="newPasswordConfirmation" autocomplete="new-password" onkeyup="passwordCheck('newPassword','newPasswordConfirmation')">
                                     <!-- labek -->
                                     <label for="newPasswordConfirmation">Confirmation du nouveau mot de passe :</label>
                                 </div>
             
                             </div>
+                            
+
             
                             <button class="btn btn-outline-primary btn-md" name="action" value="profilePassword" type="submit">Changer de mot de passe</button>
                     </fieldset>
@@ -122,10 +136,23 @@
 
         <!-- LOG OUT -->
         <form action="/connexion/logout" method="POST">
-            <button class="btn btn-outline-primary btn-md mt-5" type="submit">se déconnecter</button>
+            <button class="btn btn-outline-primary btn-md mt-5"  type="submit">se déconnecter</button>
         </form>
 
         
 
     </main>
 </div>
+
+<!-- LOADER -->
+<div class="d-none position-absolute w-100 h-100" id="loader" aria-hidden="true" data-bs-backdrop="static">
+<div  class="h-100 d-flex justify-content-center align-items-center text-center">
+    <p class="text-light me-3 mb-0">Chargement des changements ...</p>
+    <div class="spinner-grow text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+</div>
+<script src="/javascript/passwordCheck.js"></script>
+<script src="/javascript/loader.js"></script>

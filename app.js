@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
-const passport = require('passport');
+const passport = require('./server/config/passport.config');
 const MongoStore = require('connect-mongo');
 const fileUpload = require('express-fileupload');
 
@@ -27,7 +27,7 @@ app.use(session({
   errorMessage : null,
   successMessage: null,
   cookie: {
-    sameSite: 'strict',
+    sameSite: 'lax',
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000, // life cycle 1 week
   },
@@ -37,7 +37,6 @@ app.use(session({
 }));
 
 // Initialize Passport
-//passportconfig(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 

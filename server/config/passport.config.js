@@ -5,12 +5,13 @@ const User = require('../models/user');
 
 // Persist user data in the session after succesful authentification
 passport.serializeUser(function(user, done) {
-    //console.log('SERIALIZATION SUCCESSFUL' + user );
+    console.log("ID : " , user.id);
     done(null, user.id);
 })
 
 // Retrieve user data from dtabase using session ID
 passport.deserializeUser(async function(id, done) {
+    
     try {
         const user = await User.findOne({_id: id});
         const filteredUser = {
@@ -22,7 +23,6 @@ passport.deserializeUser(async function(id, done) {
             public_id : user.public_id,
             authentification_method : user.authentification_method
         }
-        //console.log('DESERIALIZATION SUCCESSFUL', user);
         done(null, filteredUser);
     } catch (error) {
         done(error, null);

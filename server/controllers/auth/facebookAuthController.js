@@ -14,7 +14,7 @@ passport.use(new FacebookStrategy({
 },
     async function(accessToken, refreshToken, facebookProfile, done) {
         console.log(facebookProfile)
-     /*    const newUser = {
+        const newUser = {
             email: facebookProfile.emails[0].value,
             firstName : facebookProfile.name.givenName,
             lastName : facebookProfile.name.familyName,
@@ -23,21 +23,23 @@ passport.use(new FacebookStrategy({
             facebook_id: facebookProfile.id,
             insert_date : new Date(),
             authentification_method : 'facebook',
-            public_id : generateRandomValue(20)
+            public_id : generateRandomValue(20),
         }
         try {
-            let user = User.findOne({ email: faebook.email })
+            let user = await User.findOne({ email: facebookProfile.emails[0].value })
             if (user) {
                 done(null, user);
             }
             else {
                 user = await User.create(newUser)
                 done(null, user);
+                
             }
         } 
         catch (error) {
-            console.log('error')
-        } */
+            req.session.errorMessage = "Une erreur est apparue lors de la connexion avec Facebook."
+            res.redirect('/connexion')
+        }
     }
 ));
 

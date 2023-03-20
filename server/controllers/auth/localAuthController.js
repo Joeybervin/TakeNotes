@@ -53,7 +53,7 @@ exports.authLocalCallback =
     })
 ;
 
-
+// POST create a new account
 exports.accountCreation = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -62,6 +62,8 @@ exports.accountCreation = async (req, res) => {
     
     try {
         console.log(email, password, passwordConfirmation)
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*._?\-&])[A-Za-z\d@$!%*._?\-&#]{8,25}$/
+
 
         if (email.trim() === '' || password.trim() === '' || passwordConfirmation.trim() === '') {
             req.session.errorMessage = "Tous les champs sont obligatoires."
@@ -72,6 +74,13 @@ exports.accountCreation = async (req, res) => {
 
         if (user) {
             req.session.errorMessage = "L'adresse e-mail existe déjà"
+            return res.redirect('/connexion');
+        }
+
+        const securePassword = password.match(passwordRegex)
+
+        if (!securePassword) {
+            req.session.errorMessage = "Le mot de passe est invalide !"
             return res.redirect('/connexion');
         }
     
@@ -89,7 +98,7 @@ exports.accountCreation = async (req, res) => {
             firstName : 'user123',
             lastName : '',
             password : hash,
-            profile_img : 'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg' ,
+            profile_img : 'https://res.cloudinary.com/joeybervin/image/upload/v1679247539/TakesNotes-default-profile-img.jpg',
             token: generateToken(email),
             insert_date : new Date(),
             authentification_method : 'local',

@@ -3,7 +3,7 @@ const inputValidation = (value, oldValue, password) => {
     const validCharsRegex = /^[A-Za-z-]+$/;
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g ;
     const urlRegex = /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/ ;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/ ;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*._?\-&])[A-Za-z\d@$!%*._?\-&#]{8,25}$/ ;
 
     // Check for white spaces in value
     if ( whiteSpace.test(value) ) return false

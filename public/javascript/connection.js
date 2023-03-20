@@ -11,7 +11,6 @@ const signUpConfirmationPasswordInput = document.getElementById("signUpConfirmat
 
 /* ERRORS MESSAGES */
 const connectionErrorMessage = document.querySelector('main > p.errorMessage');
-const signUpPasswordMatchError = document.querySelector("div > i + .errorMessage");
 
 /* show the password input value */
 const togglePasswordVisibility = (iconId, inputId) => {
@@ -34,20 +33,10 @@ const togglePasswordVisibility = (iconId, inputId) => {
         };
     })
 }
-
 togglePasswordVisibility("signInPasswordIcon", 'signInPasswordInput');
 togglePasswordVisibility("signUpPasswordIcon", 'signUpPassword');
 togglePasswordVisibility("signUpConfirmationPasswordIcon", 'signUpConfirmationPassword');
 
-  /* control if the two password value from the sign-up form match together */
-const checkPasswordMatch = () => {
-        if (signUpPasswordInput.value !== signUpConfirmationPasswordInput.value) {
-            signUpPasswordMatchError.innerHTML = 'Les mot de passe ne correspondent pas.';
-        }
-        else {
-            signUpPasswordMatchError.innerHTML = "";
-        }
-}
 
 // prevent the submit of empty input in sign-in form
 const validateSignInForm = (event) => {
@@ -68,8 +57,3 @@ const validateSignUpForm = (event) => {
 }
 signUpForm.addEventListener('submit', validateSignUpForm)
 
-/* LOADING PAGE */
-signInForm.addEventListener('submit', () => {
-    const loader = document.getElementById('loader');
-    loader.classList.remove('d-none');
-});

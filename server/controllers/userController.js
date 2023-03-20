@@ -200,8 +200,6 @@ exports.profileUpdate = async (req, res, next) => {
 
     }
 
-
-
     res.redirect(`/profil?successMessage=${successMessage}&errorMessage=${errorMessage}`);
 
 };

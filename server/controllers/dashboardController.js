@@ -38,10 +38,6 @@ exports.dashboard = async (req, res) => {
             note.last_updated = timeSinceLastUpdate(note.last_updated);
             return note;
         });
-        
-
-        console.log("current page : ", page)
-        console.log("total page : ", totalPages)
 
         res.render('pages/dashboard/dashboard', {locals : pageInfos('dashboard-page', 'TakesNotes','Free Noje.js Notes App', true, req.user),
         notes: sortedNotes,
@@ -70,14 +66,12 @@ exports.createNewNote = async (req, res) => {
             })
     }
 
-    console.log(req.query.role)
-
     res.render('pages/dashboard/createNewNote', {locals : pageInfos('createNote-page', 'TakesNotes - nouvelle note', '', false, req.user),
     role : req.query.role,
     errorMessage : req.query.errorMessage || null,
     noteId : noteToUpdate?.notes[0]._id || null,
-    savedContent : req.query.savedContent || noteToUpdate.notes[0].content,
-    savedTitle : req.query.savedTitle || noteToUpdate.notes[0].title})
+    savedContent : req.query.savedContent || noteToUpdate?.notes[0].content,
+    savedTitle : req.query.savedTitle || noteToUpdate?.notes[0].title})
 }
 
 // ======> POST create a new note with the form and save it in the database
@@ -137,7 +131,6 @@ exports.deleteNote = async (req, res) => {
         res.redirect('/tableau-de-bord');
     }
     else {
-        console.log(update);
         res.redirect('/tableau-de-bord');
     }
 }
