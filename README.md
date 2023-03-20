@@ -1,5 +1,5 @@
 # TakeNotes
-![](./mock/desktop-design.png)
+![](./public/mock/desktop-design.png)
 
 ## You need:
 - Database (MongoDB)
