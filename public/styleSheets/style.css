@@ -50,9 +50,6 @@ a {
     color: var(--text-color);;
 }
 
-input[type="text"] {
-    display: none;
-}
 /* BOUTONS */
 .btn {
     padding-left: 1rem;
