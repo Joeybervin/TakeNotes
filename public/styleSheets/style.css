@@ -415,7 +415,7 @@ footer > p {
             url('../images/human-1.svg') left  bottom no-repeat,
             url('../images/human-2.svg') right bottom no-repeat
         ;
-        background-size: fit;
+        background-size: contain;
     }
     
     h1 {
