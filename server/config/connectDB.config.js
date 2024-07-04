@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+const mongoUri = process.env.MONGODB_URI;
+
 mongoose.set("strictQuery", true);
 
 var options = {
@@ -8,10 +10,14 @@ var options = {
     useNewUrlParser: true,
 }
 
-mongoose.connect(process.env.MONGODB_URI, options)
+mongoose.connect(mongoUri, options)
 .then(() => {
   console.info('*** Database connection: Success ***');
 })
 .catch((err) => {
+  console.log(mongoUri)
   console.log(`error, failed to connect to the database because --> ${err}`);
 });
+
+
+

@@ -2,7 +2,7 @@
 const passport = require('../../config/passport.config');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../../models/user');
-const { generateToken } = require('../../../utils/index')
+const { generateToken, generateRandomValue } = require('../../../utils/index')
 const bcrypt = require('bcrypt');
 const saltRounds = Number(process.env.SALT_ROUNDS);
 
