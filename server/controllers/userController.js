@@ -148,7 +148,6 @@ exports.profileUpdate = async (req, res, next) => {
         const databaseUser = await User.findOne({email : req.user.email})
 
         if  (uploadedImageUrl) {
-            console.log(uploadedImageUrl)
             validForm = validForm && inputValidation(uploadedImageUrl, req.user.profile_img, false)
         }
 
@@ -159,14 +158,12 @@ exports.profileUpdate = async (req, res, next) => {
                     key = "password"
                     value = newPassword || value
                 }
-                console.log(`START ==> key: ${key} - value:${value} | ${validForm}`)
                 if (key === "password") {
                     validForm = inputValidation(value, databaseUser[key], true )
                 }
                 else {
                     validForm = inputValidation(value, databaseUser[key], false)
                 }
-                console.log(`END ==> key: ${key} - value:${value} | ${validForm}`)
                 if (validForm === false) break
             }
         }
@@ -187,7 +184,6 @@ exports.profileUpdate = async (req, res, next) => {
                     } }
                 );
                 if (response.modifiedCount === 1){ 
-                    console.log('JE SUIS DANS LA REPONSE DE MONGOOSE ')
                     successMessage = "Les champs ont bien été modifiés"
                 }
             }

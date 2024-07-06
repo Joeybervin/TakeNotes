@@ -8,7 +8,7 @@
         <div class="d-flex align-items-center my-4">
             <h2 class="mb-0 ms-2 ms-sm-0">Bonjour, <span class="text-decoration-underline ms-2"><%= locals.user.firstName %></span></h2>
             
-            <a href="/tableau-de-bord/nouvelle-note?role=create" class="d-inline btn btn-primary btn-sm ms-4 ms-lg-5">+ <span class="d-none d-sm-inline-block m-0 p-0">Créer une note</span></a>
+            <a href="/tableau-de-bord/nouvelle-note" class="d-inline btn btn-primary btn-sm ms-4 ms-lg-5">+ <span class="d-none d-sm-inline-block m-0 p-0">Créer une note</span></a>
 
         </div>
     
@@ -21,11 +21,11 @@
                     <div class=" col-sm-4 mb-4">
                         <div class="position-relative h-100 card">
                             <!-- delete a note -->
-                            <a href="/tableau-de-bord/deleteNote?id=<%=note._id%>">
+                            <a href="/tableau-de-bord/deleteNote?token=<%=note.token%>">
                                 <i class="position-absolute top-0 end-0 bi bi-x-lg rounded p-1 mt-2 me-3"></i>
                             </a>
                             <!-- update a note -->
-                            <a href="/tableau-de-bord/nouvelle-note?role=update&id=<%=note._id%>&title=<%=note.title%>" class="card-body text-decoration-none">
+                            <a href="/tableau-de-bord/modifier-note?token=<%=note.token%>" class="card-body text-decoration-none">
                                 <p class="title card-title pt-3 pb-1 ms-2 mt-2 mb-0">
                                     
                                     <%= note.title %>

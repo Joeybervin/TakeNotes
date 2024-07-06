@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
 var notesSchema = mongoose.Schema({
+    token: String,
     title: String,
     content: String,
-    create_by: String,
     create_at : Date,
     last_updated : Date,
-})
+    }, {_id : false}
+);
 
 var usersSchema = mongoose.Schema({
     email: String,

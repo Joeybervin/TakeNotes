@@ -8,11 +8,14 @@
             </p>
         <% } %>
 
-        <p class="title mb-4 fs-1"><i class="bi bi-<%= role === 'update' ? 'pen' : 'sticky'%>"></i> <%= role === "update" ? "Modifier" : "Creer" %> une note</p>
+        <p class="title mb-4 fs-1"><i class="bi bi-<%= role === 'update' ? 'pen' : 'sticky'%>"></i> <%= role === "update" ? "Modifier" : "Créer" %> une note</p>
 
         <!-- FORM -->
-        <form class="d-flex flex-column gap-3" action="/tableau-de-bord/<%= role === 'create' ? 'addANewNote' : 'updateNote?id=' + noteId %>" method="POST">
-
+        <form class="d-flex flex-column gap-3" action="/tableau-de-bord/<%= role === 'create' ? 'submitNewNote' : 'submitUpdatedNote'%>" method="POST">
+            <!-- NOTE TOKEN -->
+            <% if (role === 'update') { %>
+                <input type="hidden" name="token" value="<%= noteToken %>">
+            <% } %>
             <!-- TITLE -->
             <input class="rounded py-2 px-2" type="text" name="noteTitle" id="noteTitle" placeholder="Il était une fois un titre ..." value="<%= savedTitle || null %>" autofocus required>
 

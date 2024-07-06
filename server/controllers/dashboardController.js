@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const { timeSinceLastUpdate, generateToken, pageInfos } = require('../../utils/index');
+const { timeSinceLastUpdate, generateRandomValue, pageInfos } = require('../../utils/index');
 
 
 
@@ -23,7 +23,7 @@ exports.dashboard = async (req, res) => {
             { $sort: { "notes.last_updated": -1, } },
             {
                 $project: {
-                    _id: "$notes._id",
+                    token: "$notes.token",
                     title: {
                         $substr: ["$notes.title", 0, 30],
                     },
@@ -66,40 +66,46 @@ exports.dashboard = async (req, res) => {
 }
 
 // ======> RENDER form to create a new note or update one
-exports.createNewNote = async (req, res) => {
+exports.renderNewNoteForm = async (req, res) => {
 
+    const noteToken = req.query.token
+    const action = req.query.role
     let noteToUpdate;
 
-    if (req.query.role === 'update') {
-        noteToUpdate = await User.findOne({ email: req.user.email },
+    if (action === 'update') {
+        const result = await User.findOne({ email: req.user.email },
             {
                 notes: {
-                    $elemMatch: {
-                        _id: req.query.id
+                $elemMatch: {
+                        token: noteToken
                     }
-                }
+                },
+                _id : 0
             })
+
+
+        noteToUpdate = result.notes[0]
     }
+    
 
     res.render('pages/dashboard/createNewNote', {
         locals: pageInfos('createNote-page', 'TakeNotes - nouvelle note', '', false, req.user),
-        role: req.query.role,
+        role: action,
         errorMessage: req.query.errorMessage || null,
-        noteId: noteToUpdate?.notes[0]._id || null,
-        savedContent: req.query.savedContent || noteToUpdate?.notes[0].content,
-        savedTitle: req.query.savedTitle || noteToUpdate?.notes[0].title
+        noteToken: noteToken,
+        savedContent: action === "update" ? noteToUpdate.content : ""  , 
+        savedTitle:  action === "update" ? noteToUpdate.title : ""
     })
 }
 
 // ======> POST create a new note with the form and save it in the database
-exports.addANewNote = async (req, res) => {
+exports.submitNewNoteForm = async (req, res) => {
 
     const newNote = {
-        id: generateToken(req.user.email),
+        token: generateRandomValue(15),
         title: req.body.noteTitle,
         content: req.body.noteContent,
         create_at: new Date(),
-        create_by: req.user.token,
         last_updated: new Date(),
     };
 
@@ -133,13 +139,13 @@ exports.addANewNote = async (req, res) => {
 // GET delete a note
 exports.deleteNote = async (req, res) => {
 
-    const noteId = req.query.id
+    const noteToken = req.query.token
 
     const update = await User.updateOne({ email: req.user.email },
         {
             $pull: {
                 notes: {
-                    _id: noteId
+                    token: noteToken
                 }
             }
         })
@@ -152,13 +158,16 @@ exports.deleteNote = async (req, res) => {
     }
 }
 
-exports.updateNote = async (req, res) => {
+exports.submitUpdatedNote = async (req, res) => {
+    console.log(req.query.token)
 
     try {
 
         const noteListUpdate = await User.updateOne(
 
-            { email: req.user.email, "notes._id": req.query.id },
+            
+
+            { email: req.user.email, "notes.token": req.query.token },
             {
                 $set: {
                     "notes.$.title": req.body.noteTitle,

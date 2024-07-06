@@ -61,7 +61,6 @@ exports.accountCreation = async (req, res) => {
 
     
     try {
-        console.log(email, password, passwordConfirmation)
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*._?\-&])[A-Za-z\d@$!%*._?\-&#]{8,25}$/
 
 
@@ -102,7 +101,6 @@ exports.accountCreation = async (req, res) => {
             token: generateToken(email),
             insert_date : new Date(),
             authentification_method : 'local',
-            public_id : generateRandomValue(20)
         }
     
         let userSaved = await User.create(newUser)
