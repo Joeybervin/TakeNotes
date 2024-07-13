@@ -44,15 +44,17 @@
             </li>
 
             <!-- DASHBOARD -->
-            <li class="d-flex align-items-center nav-item border rounded ps-3 py-2 my-3">
-                <a class="w-100 nav-link" href="/tableau-de-bord">
-                    <i class="bi bi-border-all me-3"></i>
-                    Dashboard
-                </a>
-            </li>
+            <% if (locals.user) { %>
+                <li class="d-flex align-items-center nav-item border rounded ps-3 py-2 my-3">
+                    <a class="w-100 nav-link" href="/tableau-de-bord">
+                        <i class="bi bi-border-all me-3"></i>
+                        Dashboard
+                    </a>
+                </li>
+            <% } %>
 
             <!-- ABOUT -->
-            <li class="d-flex align-items-center nav-item border rounded ps-3 py-2">
+            <li class="d-flex align-items-center nav-item border rounded ps-3 py-2 mt-100">
                 <a class="w-100 nav-link" href="/a-propos">
                     <i class="bi bi-emoji-wink me-3"></i>
                     À propos

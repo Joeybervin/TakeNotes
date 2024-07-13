@@ -8,7 +8,7 @@ const User = require('../models/user');
 
 // --> GET user profile and the infos
 exports.profile = async (req, res) => {
-    res.render('pages/profile', { locals: pageInfos('profile-page', 'TakeNotes', 'Free Noje.js Notes App', false, req.user),
+    res.render('pages/profile', { locals: pageInfos('profile-page', 'TakeNotes', 'Free Notes App', false, req.user),
     errorMessage: req.query.errorMessage || null,
     successMessage: req.query.successMessage || null})
 }

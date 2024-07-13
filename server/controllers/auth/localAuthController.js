@@ -97,7 +97,7 @@ exports.accountCreation = async (req, res) => {
             firstName : 'user123',
             lastName : '',
             password : hash,
-            profile_img : 'https://res.cloudinary.com/joeybervin/image/upload/v1679247539/TakeNotes-default-profile-img.jpg',
+            profile_img : 'https://res.cloudinary.com/joeybervin/image/upload/v1679247539/TakesNotes/TakesNotes-default-profile-img.jpg',
             token: generateToken(email),
             insert_date : new Date(),
             authentification_method : 'local',

@@ -52,7 +52,7 @@ exports.dashboard = async (req, res) => {
         });
 
         res.render('pages/dashboard/dashboard', {
-            locals: pageInfos('dashboard-page', 'TakeNotes', 'Free Noje.js Notes App', true, req.user),
+            locals: pageInfos('dashboard-page', 'TakeNotes', 'Free Notes App', true, req.user),
             notes: sortedNotes,
             currentPage: page,
             totalPages: totalPages,
